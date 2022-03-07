@@ -7,7 +7,6 @@ import Pagination from './Pagination'
 function Cards(props) {
   return (
     <div className="cards">
-          <h1>探索神秘的旅程</h1>
           <div className="cards__container">
               <div className="cards__wrapper">
                   {/* <img src='images/img-3.jpg' alt='123'/> */}
@@ -15,7 +14,6 @@ function Cards(props) {
                       {props.data.map(item => <CardItems
                           key={item.id}
                           item={item}
-                          
                       />)}
                     </ul>
                   </div>

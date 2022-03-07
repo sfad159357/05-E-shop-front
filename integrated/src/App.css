@@ -26,12 +26,12 @@
 }
 
 .products {
-  background-image: url('../public/images/img-1.jpg');
+  /* background-image: url('../public/images/img-1.jpg');
   background-position: center;
   background-size: fill;
   background-repeat: no-repeat;
   color: #fff;
-  font-size: 100px;
+  font-size: 100px; */
 }
 
 .sign-up {

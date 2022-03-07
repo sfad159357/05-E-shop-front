@@ -17,7 +17,7 @@ function Button  ({
     return (
         <Link to='sign-up' className='btn-mobile'>
             <button
-                className={`btn ${checkButtonStyles} ${checkButtonSizes}`}
+                className={`bttn ${checkButtonStyles} ${checkButtonSizes}`}
                 onClick={onClick}
                 type={type}
             >

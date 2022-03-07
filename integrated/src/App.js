@@ -7,8 +7,8 @@ import SignUp from './components/pages/SignUp'
 
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
 import './App.css';
-import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css";
+
+
 
 function App() {
   return (

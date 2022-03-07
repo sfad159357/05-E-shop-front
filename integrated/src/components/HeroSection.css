@@ -32,11 +32,11 @@ video{
 
 }
 
-.btn{
+.bttn{
     margin-top: 10px;
 }
 
-.hero-btns .btn{
+.hero-btns .bttn{
     margin: 6px;
 }
 
@@ -69,8 +69,8 @@ video{
     .hero-btns{
         margin-bottom: 1.5rem;
     }
-    .btn{
-                font-size: 0.5rem;
+    .bttn{
+        font-size: 0.5rem;
         width: 100%;
         
     }
