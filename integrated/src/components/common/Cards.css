@@ -30,7 +30,7 @@ h1 {
   width: 100%;
   grid-template-columns:  repeat(4, 1fr);
   /* height: 500px; */
-  grid-auto-rows: 55%;
+  grid-auto-rows: 380px;
 
   margin-bottom: 24px;
 }

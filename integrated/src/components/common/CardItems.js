@@ -11,7 +11,7 @@ function CardItems({item}) {
           </figure>
            </Link>
                 <div className="cards__item__info">
-                    <h5 className="cards__item__text" >{item.text}</h5>
+                    <h5 className="cards__item__text" >{item.title}</h5>
                     <h5 className="cards__item__price" >${item.price}</h5>
 
                 </div>

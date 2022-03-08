@@ -7,25 +7,26 @@ import paginate from '../../utils/paginate'
 import CategoryBar from '../common/CategoryBar'
 import _ from "lodash";
 import SortedBar from '../common/SortedBar'
+import SearchBox from '../common/SearchBox'
 
 
 const dummy_data = [
-  { id: '01', text: 'asd', category: {name:'生活用具'}, src: '/images/img-1.jpg', path: '/service',price:100 },
-  { id: '02', text: 'zxc', category: {name:'3C電子'}, src: '/images/img-2.jpg', path: '/service',price:2000 },
-  { id: '03', text: 'qwe', category: {name:'服裝配件'}, src: '/images/img-3.jpg', path: '/service',price:300 },
-  { id: '04', text: 'rty', category: {name:'3C電子'}, src: '/images/img-4.jpg', path: '/service',price:4000 },
-  { id: '05', text: 'fgh', category: {name:'食物飲品'}, src: '/images/img-5.jpg', path: '/service',price:500 },
-  { id: '06', text: 'yui', category: {name:'服裝配件'}, src: '/images/img-6.jpg', path: '/service',price:5400 },
-  { id: '07', text: 'ghj', category: {name:'食物飲品'}, src: '/images/img-7.jpg', path: '/service',price:700 },
-  { id: '08', text: 'nmb', category: {name:'生活用具'}, src: '/images/img-8.jpg', path: '/service',price:1100 },
-  { id: '09', text: 'asd', category: {name:'服裝配件'}, src: '/images/img-1.jpg', path: '/service',price:3500 },
-  { id: '10', text: 'zxc', category: {name:'3C電子'}, src: '/images/img-2.jpg', path: '/service',price:5000 },
-  { id: '11', text: 'qwe', category: {name:'生活用具'}, src: '/images/img-3.jpg', path: '/service',price:100 },
-  { id: '12', text: 'rty', category: {name:'服裝配件'}, src: '/images/img-4.jpg', path: '/service',price:200 },
-  { id: '13', text: 'fgh', category: {name:'食物飲品'}, src: '/images/img-5.jpg', path: '/service',price:400 },
-  { id: '14', text: 'yui', category: {name:'服裝配件'}, src: '/images/img-6.jpg', path: '/service',price:500 },
-  { id: '15', text: 'ghj', category: {name:'3C電子'}, src: '/images/img-7.jpg', path: '/service',price:3300 },
-  { id: '16', text: 'nmb', category: {name:'食物飲品'}, src: '/images/img-8.jpg', path: '/service',price:500 },
+  { id: '01', title: '書桌', category: {name:'生活用具'}, src: '/images/img-1.jpg', path: '/service',price:100 },
+  { id: '02', title: 'iphone X', category: {name:'3C電子'}, src: '/images/img-2.jpg', path: '/service',price:2000 },
+  { id: '03', title: '牛仔褲', category: {name:'服裝配件'}, src: '/images/img-3.jpg', path: '/service',price:300 },
+  { id: '04', title: 'rty', category: {name:'3C電子'}, src: '/images/img-4.jpg', path: '/service',price:4000 },
+  { id: '05', title: 'fgh', category: {name:'食物飲品'}, src: '/images/img-5.jpg', path: '/service',price:500 },
+  { id: '06', title: 'yui', category: {name:'服裝配件'}, src: '/images/img-6.jpg', path: '/service',price:5400 },
+  { id: '07', title: 'ghj', category: {name:'食物飲品'}, src: '/images/img-7.jpg', path: '/service',price:700 },
+  { id: '08', title: '桌椅組', category: {name:'生活用具'}, src: '/images/img-8.jpg', path: '/service',price:1100 },
+  { id: '09', title: 'asd', category: {name:'服裝配件'}, src: '/images/img-1.jpg', path: '/service',price:3500 },
+  { id: '10', title: 'iphone 12', category: {name:'3C電子'}, src: '/images/img-2.jpg', path: '/service',price:5000 },
+  { id: '11', title: 'qwe', category: {name:'生活用具'}, src: '/images/img-3.jpg', path: '/service',price:100 },
+  { id: '12', title: 'rty', category: {name:'服裝配件'}, src: '/images/img-4.jpg', path: '/service',price:200 },
+  { id: '13', title: 'fgh', category: {name:'食物飲品'}, src: '/images/img-5.jpg', path: '/service',price:400 },
+  { id: '14', title: 'yui', category: {name:'服裝配件'}, src: '/images/img-6.jpg', path: '/service',price:500 },
+  { id: '15', title: 'ipad 9', category: {name:'3C電子'}, src: '/images/img-7.jpg', path: '/service',price:3300 },
+  { id: '16', title: '堅果', category: {name:'食物飲品'}, src: '/images/img-8.jpg', path: '/service',price:500 },
 ]
 
   const categoryData = [{name:'全部',_id:0},{name:'3C電子', _id:1}, {name:'服裝配件', _id:2}, {name:'食物飲品', _id:3},{name:'生活用具', _id:4}]
@@ -36,6 +37,7 @@ function Products() {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState({ name: '全部', _id: 0 })
   const [priceOrder, setPriceOrder] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   
 
   const handlePageChange = (pageNumber) => {
@@ -54,8 +56,14 @@ function Products() {
     setPriceOrder(order);
     setCurrentPage(1)
   }
+
+  const handleSearchQuery = (query) => {
+    setSearchQuery(query);
+    setCurrentPage(1)
+
+  }
   
- 
+  console.log('searchQuery', searchQuery)
 
 const itemsCount = dummy_data.length
 
@@ -79,13 +87,19 @@ if (priceOrder) {
   )
 }
   
-  const paginatedData = paginate(priceSortedData, currentPage, pageSize)
-
+  const searchedData = priceSortedData.filter(data => data.title.includes(searchQuery))
+  console.log('searchedData', searchedData)
   
+  const paginatedData = paginate(searchedData, currentPage, pageSize)
+
+  const hasDataArray = (dataArray) => {
+    if (dataArray.length === 0) return <h2>抱歉，搜尋不到你想要的商品</h2>
+    return 
+  }
   
   return (
     <>
-      <h1>Products</h1>
+      <h1 className='products-title'>所有商品</h1>
       <CategoryBar
         items={categoryData}
         onItemSelect={handleCategorySelect}
@@ -95,15 +109,24 @@ if (priceOrder) {
         orderState={priceOrder}
         onPriceOrder={handlePriceOrder}
       />
-      <Cards
-        data={paginatedData}
-        pageSize={pageSize}
-        itemsCount={itemsCount}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        onCategoryChange={handleCategorySelect}
-      /> 
-
+      <SearchBox
+        value={searchQuery}
+        placeholder='搜尋想要的商品...'
+        onChange={handleSearchQuery} />
+    
+      {/* 如果沒有合乎篩選的data就叫出「抱歉...」 */}
+      {paginatedData.length === 0
+        ? <h3 className='not-searched'>抱歉，搜尋不到你想要的商品</h3>
+        : <Cards
+            data={paginatedData}
+            pageSize={pageSize}
+            itemsCount={itemsCount}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            onCategoryChange={handleCategorySelect}
+          />
+      }
+      
       <Footer />
     </>
   )
