@@ -1,0 +1,162 @@
+.footer-container {
+    background-color: #242424;
+    padding: 2rem 0 1rem 0;
+    color:whitesmoke;
+       display:flex;
+     flex-direction:column;
+    justify-content: center;
+    align-items:center;
+   
+}
+
+section.footer-subscription{
+    display:flex;
+     flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.footer-subscription > p {
+    font-size:2rem;
+}
+
+.footer-input{
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    border:none;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: 1px solid white
+}
+
+Button{
+    margin:20px 0px
+}
+
+.footer-links{
+    display:flex;
+    flex:1 1 auto;
+    width:100%;
+    max-width: 1000px;
+    justify-content:center;
+}
+
+.footer-links-wrapper{
+    display:flex;
+    align-items:center;
+          width: 100%;
+
+
+}
+
+.footer-links-items{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+      width: 100%;
+        margin: 16px;
+
+
+}
+
+.footer-links-items > a {
+    margin: 10px;
+    text-decoration: none;
+    color: #fafafa;
+    transition: 0.3s ease-in
+}
+
+.footer-links-items > a:hover {
+    margin: 10px;
+    text-decoration: none;
+    color: #fd3;
+    transition: 0.3s ease-in
+}
+
+/* 最底下 */
+.social-media{
+     width: 100%;
+  max-width: 1000px;
+   
+ }
+
+ .social-media-wrapper{
+    display:flex;
+     /* flex-direction:row; */
+    justify-content:space-between;
+    align-items:center;
+    width: 90%;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  font-size: 1rem;
+  color:whitesmoke
+ }
+
+ .social-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.link-logo{
+    text-decoration: none;
+    color:white
+}
+
+.link-logo:hover{
+    text-decoration: none;
+     color: #fd3;
+}
+
+.social-icon-link{
+    text-decoration: none;
+    color:white
+}
+
+.social-icon-link:hover{
+    text-decoration: none;
+    color: #fd3;
+
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    .footer-subscription{
+        padding: 10% 10%
+    }
+
+    .footer-subscription-heading{
+        font-size: 1rem;
+    }
+    .input-area{
+        margin: 1rem;
+    }
+  .footer-links {
+    padding-top: 2rem;
+  }
+
+  .footer-input {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .footer-links-wrapper, .social-media-wrapper {
+    flex-direction: column;
+  }
+
+  .footer-logo, .website-right, .social-icons{
+    margin-bottom: 2rem;
+  }
+}
+
