@@ -1,0 +1,11 @@
+.form2{
+    width: 40%;
+    border: 1px solid #999;
+    margin:auto;
+    padding: 20px 40px;
+    box-shadow: 2px 2px 5px #333;
+}
+
+.form-group .required{
+    color:red;
+}

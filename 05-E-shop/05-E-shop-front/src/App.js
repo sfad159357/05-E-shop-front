@@ -16,13 +16,15 @@ import './App.css';
 
 function App() {
   
+  
   const [user, setUser] = useState({})
   
   useEffect(() => {
     const _user = auth.getAuthUser();
     setUser(_user);
-
-  },[])
+  }, [])
+  
+  console.log('App render')
 
   return (
     <BrowserRouter>

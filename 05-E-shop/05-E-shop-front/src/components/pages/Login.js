@@ -1,10 +1,8 @@
 import {useState} from "react";
 import Joi from "joi-browser";
 import Form2 from "../common/Form2";
-import Input from "../common/Input";
 import auth from "../service/authService";
-import render from "../../utils/renderComponents";
-import {useLocation, useNavigate} from 'react-router-dom'
+import Home from './Home'
 
 function Login() {
 
@@ -13,30 +11,20 @@ function Login() {
       // password: password_value
   
   
-  const [data, setData] = useState({  })
   const [errors, setErrors ] = useState({})
-  
- 
 
-  const handleSetData = (key, value) => {
-    
-    setData(state => {
-      state[key] = value;
-      console.log('state',state)
-      return state;
-    })
-
-    console.log('data',data)
-  }
+  const schema = {
+        email: Joi.string().required().label("email"), // label可以更改跳出error時的欄位名稱
+        password: Joi.string().min(5).required().label("password"),
+  };
   
 
-  const location = useLocation()
-
- const doSubmit = async () => {
+  const doSubmit = async (data) => {
     // const { state } = this.props.location;
     // console.log("location state", state);
     try {
       await auth.login(data);
+      window.location = '/'
     //   this.props.history.push("/"); // 我們不要子元件的跳轉，因為這無法讓App.js呼叫CMD，也就是需要母元件被重新載入
       // 如果訪客要訪問被保護元件，而Route的props有記錄被保護元件的location當前位置，所以如果從被保護元件過來，登入後返回被保護元件。
       // 但不一定都是從被保護元件點進login，所以返回"/"首頁
@@ -45,32 +33,35 @@ function Login() {
       console.log("ex", ex.response);
       if (ex.response && ex.response.status === 400) {
         errors.email = ex.response.data;
-        setErrors({ errors });
+        setErrors(errors);
+        alert('login errors',errors)
       }
     }
   };
 
-    // if (auth.getAuthUser()) return <Redirect to="/" />; // 假如訪客已經登入，就不要再讓訪客進入login頁面，直接返回首頁
-    console.log('location',location)
-  console.log('data', data)
+  if (auth.getAuthUser()) return <Home /> 
+      
+  // 假如訪客已經登入，就不要再讓訪客進入login頁面，直接返回首頁
+      
   
-    return (
-      <form onSubmit={doSubmit}>
+  return (
+      <>
         <h1>登入會員</h1>
         <Form2
           cpnts={[
-            { cpnt: 'Input', name: 'email' },
-            { cpnt: 'Input', name: 'password' },
-            { cpnt: 'Button', name: 'submit' }
+            { cpnt: 'Input', label:'電子信箱:',name: 'email' ,type:'email', placeholder:'請符合信箱格式，如abc@gmail.com'},
+            { cpnt: 'Input', label:'密碼:',name: 'password', type:'password' ,placeholder:'請輸入密碼至少5碼以上' },
+            { cpnt: 'Button', label:'提交',name: 'submit', type:'submit' }
 
-          ]}
-          data={data}
-          onSetData={handleSetData}
+        ]}
+        schema={schema}
+        onSubmit={doSubmit}
+        errors={errors}
         />
         {/* {this.renderInput("email", "Email")}
         {this.renderInput("password", "Password", "password")}
         {this.renderButton("Login")} */}
-      </form>
+      </>
     );
 }
   
