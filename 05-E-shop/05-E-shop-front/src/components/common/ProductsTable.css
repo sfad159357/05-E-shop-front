@@ -1,0 +1,9 @@
+.not-on-sale, .no-stock{
+    color: #f55
+}
+
+.table-img  {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}

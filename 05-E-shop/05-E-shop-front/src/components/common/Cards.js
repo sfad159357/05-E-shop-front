@@ -10,8 +10,8 @@ function Cards(props) {
           <div className="cards__container">
               <div className="cards__wrapper">
                   {/* <img src='images/img-3.jpg' alt='123'/> */}
-                  <ul className="cards__items">
-                      {props.data.map(item => <CardItems
+                    <ul className="cards__items">
+                      {props.data.map(item =>  <CardItems
                           key={item._id}
                           item={item}
                       />)}

@@ -3,12 +3,12 @@ import '../../App.css'
 import ProductTable from '../common/ProductsTable'
 import UpdateProducts from '../common/UpdateProducts'
 
-function ProductsForm() {
+function ProductsForm({originProducts}) {
   return (
     <>
       <h1 className="ProductsForm">ProductsForm</h1>
       <UpdateProducts />
-      <ProductTable />
+      <ProductTable originProducts={ originProducts}/>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect,useContext} from 'react'
 import '../../App.css'
 import Cards from '../common/Cards'
 import Footer from '../Footer'
@@ -11,33 +11,34 @@ import SearchBox from '../common/SearchBox'
 import { getProducts } from '../service/productsService'
 import { getCategories } from '../service/categoryService'
 
-function Products() {
+function Products({ originProducts,categories}) {
   
 
-  const [originProducts, setOriginProducts] = useState([])
-  const [categories, setCategories] = useState([])
+  // const [originProducts, setOriginProducts] = useState([])
+  // const [categories, setCategories] = useState([])
   const [pageSize, setPageSize] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState({ name: '全部', _id: 0 })
   const [priceOrder, setPriceOrder] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+
   
 
-  const populateProducts = async () => {
-    const { data: productsArray } = await getProducts()
-    setOriginProducts(productsArray)
-  }
+  // const populateProducts = async () => { 
+  //   const { data: productsArray } = await getProducts()
+  //   setOriginProducts(productsArray)
+  // }
 
-  const populateCategories = async () => {
-    const { data: categoriesArray } = await getCategories()
-    setCategories(categoriesArray)
-  }
+  // const populateCategories = async () => {
+  //   const { data: categoriesArray } = await getCategories()
+  //   setCategories(categoriesArray)
+  // }
 
-   useEffect(() => {
-    console.log('useEffect')
-    populateProducts()
-    populateCategories()
-  },[])
+  //  useEffect(() => {
+  //   console.log('useEffect')
+  //   populateProducts()
+  //   populateCategories()
+  // },[])
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

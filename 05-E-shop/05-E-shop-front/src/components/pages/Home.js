@@ -26,7 +26,7 @@ const dummy_data = [
   { _id: '16', title: '堅果', category: {name:'食物飲品'}, src: '/images/img-8.jpg', path: '/service',price:500 },
 ]
 
-function Home() {
+function Home({ originProducts}) {
 
   const [pageSize, setPageSize] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
@@ -36,8 +36,8 @@ function Home() {
     setCurrentPage(pageNumber);
   };
 
-  const paginatedData = paginate(dummy_data, currentPage, pageSize)
-  const itemsCount = dummy_data.length
+  const paginatedData = paginate(originProducts, currentPage, pageSize)
+  const itemsCount = originProducts.length
 
   return (
     <>

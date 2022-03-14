@@ -38,10 +38,12 @@ export function logout() {
   localStorage.removeItem(token);
 }
 
-export default {
+const auth = {
   login,
   register,
   getAuthUser,
   logout,
   getJWT,
 };
+
+export default auth;

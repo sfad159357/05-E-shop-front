@@ -14,10 +14,13 @@ export class TableBody extends Component {
 
   render() {
     const { items, columns } = this.props;
+    console.log('tableBody items', items)
+        console.log('tableBody col',columns)
+
     return (
       <>
         <tbody>
-          {items.map((item) => (
+          {items && items.map((item) => (
             <tr key={item._id}>
               {columns.map((col) => (
                 <td key={this.createKey(item, col)}>

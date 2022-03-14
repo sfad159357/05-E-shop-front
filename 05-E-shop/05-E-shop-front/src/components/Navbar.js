@@ -49,13 +49,13 @@ function Navbar({ user }) {
                       <Link to='/' className='nav-links' onClick={closeMobileMenu}>回首頁</Link>
                   </li>
                   <li className="nav-item">
-                      <Link to='/update-products' className='nav-links' onClick={closeMobileMenu}>更新產品</Link>
-                  </li>
-                  <li className="nav-item">
                       <Link to='/products' className='nav-links' onClick={closeMobileMenu}>產品內容</Link>
                   </li>
                   {user && (
                       <>
+                  <li className="nav-item">
+                      <Link to='/update-products' className='nav-links' onClick={closeMobileMenu}>更新產品</Link>
+                  </li>
                     <li className="nav-item">
                     <Link to='/profile' className='nav-links btn--outline' onClick={closeMobileMenu}>您好，{user.name}</Link>
                       </li>

@@ -11,9 +11,11 @@ function CardItems({item}) {
           </figure>
            </Link>
                 <div className="cards__item__info">
-                    <h5 className="cards__item__text" >{item.title}</h5>
-                    <h5 className="cards__item__price" >${item.price}</h5>
-
+                 <h5 className="cards__item__text" >{item.title}</h5>
+                  <div className="cards__item__inline">
+                    <div className="cards__item__price" >${item.price}</div>
+                    <div className="cards__item__sales" >銷售量:<span className="cards__item__sales_num">{item.sales}</span></div>
+                  </div>
                 </div>
            
         </li>

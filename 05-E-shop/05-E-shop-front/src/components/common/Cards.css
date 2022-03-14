@@ -1,5 +1,5 @@
 .cards {
-  padding: 0rem 1rem;
+  padding: 2rem 1rem;
   background: #fff;
 }
 
@@ -109,6 +109,17 @@ h1 {
   color: #252e48;
   font-size: 18px;
   line-height: 24px;
+}
+
+.cards__item__inline{
+  display: flex;
+  justify-content: space-between; 
+}
+
+
+
+.cards__item__sales_num{
+  color:#f33
 }
 
 @media only screen and (max-width: 768px) {
