@@ -18,11 +18,10 @@ function Products({ originProducts,categories}) {
   // const [categories, setCategories] = useState([])
   const [pageSize, setPageSize] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedCategory, setSelectedCategory] = useState({ name: '全部', _id: 0 })
+  const [selectedCategory, setSelectedCategory] = useState({_id: 0 , name: '全部種類' })
   const [priceOrder, setPriceOrder] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
 
-  
 
   // const populateProducts = async () => { 
   //   const { data: productsArray } = await getProducts()
@@ -45,7 +44,6 @@ function Products({ originProducts,categories}) {
   };
 
   const handleCategorySelect = (category) => {
-    console.log('handleCategorySelect',category)
     setSelectedCategory(category);
     // searchQuery: "", // 當使用者選擇genre種類，清空搜尋字串
     setCurrentPage(1);  // 這裡要重設為第1頁，是因為在第2頁是因為movies超過pageSize=4，所以從startIndex=4開始切割
@@ -63,40 +61,37 @@ function Products({ originProducts,categories}) {
 
   }
   
-  console.log('originProducts', originProducts)
 
   const itemsCount = originProducts.length
 
   
   let categorySortedData = originProducts;
 
-  if (categories && selectedCategory.name !== '全部') {
+  if (categories && selectedCategory.name !== '全部種類') {
      categorySortedData = originProducts.filter( data => data.category.name === selectedCategory.name)  
   } 
   
-console.log('priceOrder', priceOrder)
 
-let priceSortedData = categorySortedData
+  let priceSortedData = categorySortedData
   
   // 在priceOrder被選擇後，才會開始篩選
-if (priceOrder) {
-  priceSortedData = _.orderBy(
-    categorySortedData,
-    ['price'],
-    priceOrder
-  )
-}
+  if (priceOrder) {
+    priceSortedData = _.orderBy(
+      categorySortedData,
+      ['price'],
+      priceOrder
+    )
+  }
   
   const searchedData = priceSortedData.filter(data => data.title.toLowerCase().includes(searchQuery.toLowerCase()))
-  console.log('searchedData', searchedData)
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
 
-  const hasDataArray = (dataArray) => {
-    if (dataArray.length === 0) return <h2>抱歉，搜尋不到你想要的商品</h2>
-    return 
-  }
-  
+  if(paginatedData)
+
+  console.log('categorySortedData',categorySortedData)
+
+
   return (
     <>
       <h1 className='products-title'>所有商品</h1>

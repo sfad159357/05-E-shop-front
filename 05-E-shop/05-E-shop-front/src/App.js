@@ -24,14 +24,15 @@ function App() {
   const populateProducts = async () => {
     const { data: products } = await getProducts()
     setAllProducts(products);
-    
+
     // 篩選掉「未上架」和「庫存為0」的商品
     const productsFiltered =  products.filter(product => (product.onSale === true) && (product.numberInStock !== 0))
     setOnSaleProducts(productsFiltered)
   }
 
   const populateCategories = async () => {
-    const { data: categoriesArray } = await getCategories()
+    let { data: categoriesArray } = await getCategories()
+    categoriesArray = [{_id:0,name:'全部種類'}, ...categoriesArray]
     setCategories(categoriesArray)
   } 
   
@@ -50,7 +51,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home originProducts={onSaleProducts} />} />
         <Route path="/products" element={<Products originProducts={onSaleProducts} categories={ categories}/>} />
-        <Route path="/update-products" element={<ProductsForm originProducts={allProducts} />} />
+        <Route path="/update-products" element={<ProductsForm user={user} originProducts={allProducts}  categories={ categories}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />

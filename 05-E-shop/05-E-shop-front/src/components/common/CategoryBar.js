@@ -9,11 +9,11 @@ function CategoryBar({
 }) {
     return (
         <>
-        <h2>種類篩選</h2>
-         <ul className="nav nav-tabs">
-            {items.map((item) => (
-                <li
-                key={item[valueProperty]}
+        <ul className="nav nav-tabs">
+        <div className= "nav-item">種類篩選：</div>
+           { items.map((item) => (
+              <li
+                key={item[textProperty]}
                 onClick={() => onItemSelect(item)}
                 className= "nav-item">
                 <button
@@ -21,7 +21,7 @@ function CategoryBar({
                 >
                     {item[textProperty]}
                 </button>
-                </li>
+              </li> 
             ))}
         </ul>
     </>

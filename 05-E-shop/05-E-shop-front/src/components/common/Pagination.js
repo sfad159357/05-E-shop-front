@@ -12,9 +12,7 @@ export default function Pagination({
   if (pageCount === 1) return null;
   const pages = _.range(1, pageCount + 1); // pageCount=2.25, 結果：[1,2,3]
   return (
-    <>
-    <h1>Pagination</h1>
-    <nav>
+    <nav className="pagination">
       <ul className="pagination justify-content-center">
         {pages.map((page) => (
           <li
@@ -32,7 +30,6 @@ export default function Pagination({
         ))}
       </ul>
       </nav>
-      </>
   );
 }
 
