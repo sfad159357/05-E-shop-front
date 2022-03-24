@@ -13,97 +13,62 @@ import './ProductsTable.css'
 
 // step1:從func component改變成class component
 // step2:將Movie母元件的handleSort移至自己元件本身內，另設方法
-function ProductTable({ onSort,user, originProducts, categories }) {
+function ProductTable({ user, dbProducts, categories,columns  }) {
   // 只有admin才能進行刪除
 
   const [pageSize, setPageSize] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedCategory, setSelectedCategory] = useState({ name: '全部', _id: 0 })
-  const [priceOrder, setPriceOrder] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState({ _id: 0 , name: '全部種類'})
   const [searchQuery, setSearchQuery] = useState('')
-  
+  const [sortedColumn, setSortedColumn] = useState( {path: "title", order: "asc" })
+
 
     if (user && user.isAdmin) this.columns.push(this.deleteColumn());
-  
-
-  const sortedColumn = { path: "title", order: "asc" }
-
-  
-  const columns = [
-    {
-      path: "title",
-      label: "商品名稱",
-      content: (product) => (
-        <Link
-          to={`/products/${product._id}`} // 作者要的
-        >
-          {product.title}
-        </Link>
-      ),
-    },
-    { path: "src", label: "圖片", content: (product) => <img className='table-img' src={product.src} alt={product.title} /> },
-    { path: "category.name", label: "種類" },
-    { path: "price", label: "價格" },
-    { path: "sales", label: "銷售量" },
-    { path: "numberInStock", label: "庫存" ,content: (product) => (product.numberInStock ? <span className="on-sale">{product.numberInStock}</span> : <span className="no-stock">0</span>)},
-    { path: "onSale", label: "上下架", content: (product) => (product.onSale ? <span className="on-sale">上架中</span> : <span className="not-on-sale">未上架</span>)},
-    {
-      key: "like",
-      content: (product) => ( // 屬性content函式化，參數Product，回傳react element<Like>
-        <Like isLiked={product.isLiked} onLike={() => this.props.onLike(product)} />
-      ),
-    }, // const x = <h1></h1>，x就是原javascript物件，可用來當作參數傳遞
-  ];
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   const handleCategorySelect = (category) => {
-    console.log('handleCategorySelect',category)
     setSelectedCategory(category);
     // searchQuery: "", // 當使用者選擇genre種類，清空搜尋字串
     setCurrentPage(1);  // 這裡要重設為第1頁，是因為在第2頁是因為movies超過pageSize=4，所以從startIndex=4開始切割
     // ->不過，我們丟到paginate(filtered)，經過filtered的movies只有3個，所以因為state中currentPage還在2，一樣會幫你從index=4的元素開始切割
   };
 
-  const handlePriceOrder = (order) => {
-    setPriceOrder(order);
-    setCurrentPage(1)
-  }
-
   const handleSearchQuery = (query) => {
     setSearchQuery(query);
     setCurrentPage(1)
-
   }
+
+   const handleSort = (sortedColumn) => {
+    setSortedColumn(sortedColumn); // ascending升序
+  };
   
-  console.log('originProducts', originProducts)
 
-  const itemsCount = originProducts.length
+  const itemsCount = dbProducts.length
 
   
-  let categorySortedData = originProducts;
+  let categorySortedData = dbProducts;
 
-  if (categories && selectedCategory.name !== '全部') {
-     categorySortedData = originProducts.filter( data => data.category.name === selectedCategory.name)  
+  if (categories && selectedCategory.name !== '全部種類') {
+     categorySortedData = dbProducts.filter( data => data.category.name === selectedCategory.name)  
   } 
   
 
-  let priceSortedData = categorySortedData
+  let sortedData= categorySortedData
   
   // 在priceOrder被選擇後，才會開始篩選
-if (priceOrder) {
-  priceSortedData = _.orderBy(
+  sortedData = _.orderBy(
     categorySortedData,
-    ['price'],
-    priceOrder
+    [sortedColumn.path],
+    [sortedColumn.order]
   )
-}
   
-  const searchedData = priceSortedData.filter(data => data.title.toLowerCase().includes(searchQuery.toLowerCase()))
+  const searchedData = sortedData.filter(data => data.title.toLowerCase().includes(searchQuery.toLowerCase()))
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
+    console.log('ProductTable render',categorySortedData )
 
 
   const deleteColumn = () =>{
@@ -131,10 +96,6 @@ if (priceOrder) {
         onItemSelect={handleCategorySelect}
         selectedItem={selectedCategory}
       />
-      <SortedBar
-        orderState={priceOrder}
-        onPriceOrder={handlePriceOrder}
-      />
       <SearchBox
         value={searchQuery}
         placeholder='搜尋想要的商品...'
@@ -144,8 +105,7 @@ if (priceOrder) {
           items={paginatedData}
           columns={columns}
           sortedColumn={sortedColumn}
-          onSort={onSort}
-          
+          onSort={handleSort}       
         />
         <Pagination
         // 在Pagination元件所產生的event伴隨著參數，要返回來做handle event和參數處理

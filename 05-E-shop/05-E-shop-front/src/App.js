@@ -17,17 +17,17 @@ import './App.css';
 function App() {
   
   const [onSaleProducts, setOnSaleProducts] = useState([])
-  const [allProducts, setAllProducts] = useState([])
   const [categories, setCategories] = useState([])
   const [user, setUser] = useState({})
 
   const populateProducts = async () => {
     const { data: products } = await getProducts()
-    setAllProducts(products);
+      console.log('onSaleProducts',products)
+
 
     // 篩選掉「未上架」和「庫存為0」的商品
-    const productsFiltered =  products.filter(product => (product.onSale === true) && (product.numberInStock !== 0))
-    setOnSaleProducts(productsFiltered)
+    const productsOnSale =  products.filter(product => (product.onSale === 1) && (product.numberInStock !== 0))
+    setOnSaleProducts(productsOnSale)
   }
 
   const populateCategories = async () => {
@@ -44,14 +44,13 @@ function App() {
 
   }, [])
 
-
   return (
     <BrowserRouter>
       <Navbar user={user}/>
       <Routes>
         <Route path="/" element={<Home originProducts={onSaleProducts} />} />
         <Route path="/products" element={<Products originProducts={onSaleProducts} categories={ categories}/>} />
-        <Route path="/update-products" element={<ProductsForm user={user} originProducts={allProducts}  categories={ categories}/>} />
+        <Route path="/update-products" element={<ProductsForm user={user} categories={ categories}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />

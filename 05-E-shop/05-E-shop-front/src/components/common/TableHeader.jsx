@@ -32,7 +32,19 @@ export class TableHeader extends Component {
   };
 
   render() {
-    const { columns } = this.props;
+    const { isSimpleHeader,columns } = this.props;
+    if (isSimpleHeader)
+    return (
+    <thead>
+        <tr>
+       {columns.map((col) => (
+            <th key={col.label || col.key}>
+              {col.label} 
+            </th>
+          ))}
+        </tr>
+      </thead>
+    )
     return (
       <thead>
         <tr>

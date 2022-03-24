@@ -6,23 +6,23 @@ function productUrl(id) {
   return `${apiEndpoint}/${id}`;
 }
 
-export function getProducts() {
-  return http.get(apiEndpoint);
+export async function getProducts() {
+  return await http.get(apiEndpoint).catch(e => { console.log('e',e)});
 }
 
-export function getProduct(product_id) {
-  return http.get(productUrl(product_id));
+export async function getProduct(product_id) {
+  return await http.get(productUrl(product_id)).catch(e => { console.log('e',e)});
 }
 
-export function deleteProduct(product_id) {
-  return http.delete(productUrl(product_id));
+export async function deleteProduct(product_id) {
+  return await http.delete(productUrl(product_id)).catch(e => { console.log('e', e)});
 }
 
-export function saveProduct(product) {
+export async function saveProduct(product) {
   // create new product
   if (!product._id) {
     // productInDb._id = Date.now().toString(); // 幫我們新增沒有新product的Id，若沒有新增toString()則無法進去編輯新product
-    return http.post(apiEndpoint, product);
+    return await http.post(apiEndpoint, product).catch(e => { console.log(e)});
   }
 
   // update old product

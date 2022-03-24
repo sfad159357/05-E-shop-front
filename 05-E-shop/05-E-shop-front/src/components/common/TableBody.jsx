@@ -14,9 +14,7 @@ export class TableBody extends Component {
 
   render() {
     const { items, columns } = this.props;
-    console.log('tableBody items', items)
-        console.log('tableBody col',columns)
-
+   
     return (
       <>
         <tbody>

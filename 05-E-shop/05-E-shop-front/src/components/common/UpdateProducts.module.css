@@ -1,6 +1,7 @@
 .form {
-  margin: 1rem 4rem;
-  padding: 1rem 4rem;
+
+  margin: 1rem 2rem;
+  padding: 1rem 2rem;
 }
 
 .control {
@@ -44,3 +45,19 @@
   background-color: #a50e48;
   border-color: #a50e48;
 }
+
+.table_input{
+  width: 100%;
+}
+
+
+
+select{
+  height: 28px;
+}
+
+.form_btn{
+  display: flex;
+  justify-content: end;
+}
+
