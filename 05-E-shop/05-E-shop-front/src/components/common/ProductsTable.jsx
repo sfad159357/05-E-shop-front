@@ -64,25 +64,6 @@ function ProductTable({ user, dbProducts, categories,columns  }) {
   const searchedData = sortedData.filter(data => data.title.toLowerCase().includes(searchQuery.toLowerCase()))
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
-    console.log('ProductTable render',categorySortedData )
-
-
-  const deleteColumn = () =>{
-    return {
-      key: "delete",
-      content: (product) => {
-        return (
-          <button
-            type="submit"
-            className="btn btn-danger btn-sm"
-            onClick={() => this.props.onDelete(product._id)}
-          >
-            Delete
-          </button>
-        );
-      },
-    };
-  }
 
 
     return (

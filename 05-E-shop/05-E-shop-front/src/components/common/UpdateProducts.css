@@ -51,7 +51,6 @@
 }
 
 
-
 select{
   height: 28px;
 }
@@ -61,3 +60,14 @@ select{
   justify-content: end;
 }
 
+td._id{
+  width: 22%;
+}
+
+td.src{
+  width: 13%;
+}
+
+.form_btn button{
+  margin-left: 10px;
+}

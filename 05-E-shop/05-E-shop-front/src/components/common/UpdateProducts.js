@@ -1,22 +1,28 @@
 import { useRef, useEffect, useState} from 'react'
-import classes from './UpdateProducts.module.css'
+import './UpdateProducts.css'
 import {useNavigate } from 'react-router-dom';
 import { TableHeader } from './TableHeader';
 import { saveProduct, getProduct } from '../service/productsService'
 import { toast } from 'react-toastify';
 
-function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts}) {
+function UpdateProducts({
+  columns,
+  categories,
+  onUpdate,
+  productId,
+  handleProductId,
+  dbProducts }) {
   
 
   const [inputValue, setInputValue] = useState({
-        _id:'',
-        title: '',
-        src:'',
-        categoryId: '',
-        numberInStock: '',  
-        sales: 0,
-        price: '',
-        onSale: ''
+      _id:'',
+      title: '',
+      src:'',
+      categoryId: '',
+      numberInStock: '',  
+      sales: 0,
+      price: '',
+      onSale: 1
   })
 
   // 點選table商品名，其input值更改為被點商品各屬性值
@@ -69,13 +75,8 @@ function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts})
   // },[])
   
 
-
-   
-  const doSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      console.log('doSubmit', inputValue)
-      await saveProduct(inputValue); // 將前端的data儲存到後端，函式會幫助再將前端data的欄位格式轉換成後台需要的格式
+  const cleanInput = () => {
+      handleProductId('')
       setInputValue({ // 儲存以後input內清空
         _id:'',
         title: '',
@@ -84,8 +85,16 @@ function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts})
         numberInStock: '',
         sales: 0,
         price: '',
-        onSale: 0
+        onSale: 1
       })
+  }
+   
+  const doSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if(!inputValue._id) delete inputValue._id
+      await saveProduct(inputValue); // 將前端的data儲存到後端，函式會幫助再將前端data的欄位格式轉換成後台需要的格式
+      cleanInput()
       onUpdate() // 使其能夠重新更新母元件，使其重新抓db的資料下來
       toast.success(`已成功更新${inputValue.title}`);
     } catch (ex) {
@@ -134,18 +143,19 @@ function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts})
   // 讓TableHeader省略一些功能
 
 
-  console.log('UpdateProducts render')
+  console.log('UpdateProducts render', inputValue)
 
   return (
       <>
-      <form className={classes.form} onSubmit={doSubmit}>
+      <form className='form' onSubmit={doSubmit}>
         <table className="table table-striped mt-4 md-4"> 
           <TableHeader columns={columns} isSimpleHeader={isSimpleHeader} />
           <tbody >
             <tr>
-              <td><input  name='title' className={classes.table_input} type='text' value={inputValue.title } onChange={handleChange}/></td>
-              <td><input  name='src' className={classes.table_input} type='text' value={inputValue.src }  onChange={handleChange}/></td>
-              <td><select name="categoryId" value={inputValue.categoryId} onChange={handleChange}>
+              <td><input  name='_id' className='table_input' type='text' value={inputValue._id }onChange={handleChange}  disabled /></td>
+              <td><input  name='src' className='table_input' type='text' value={inputValue.src }  onChange={handleChange}/></td>
+              <td><input  name='title' className='table_input' type='text' value={inputValue.title } onChange={handleChange}/></td>
+              <td><select name='categoryId' value={inputValue.categoryId} onChange={handleChange}>
                   <option value='' />
                   {categoriesFiltered.map((option) => (
                     <option key={option._id} value={option._id}>
@@ -155,12 +165,11 @@ function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts})
                 </select>
                 {/* {error && <div className="alert alert-danger">{error}</div>} */}
               </td>
-              {/* <td><Select name="category" ref={categoryInputRef} options={categoriesFiltered}/></td> */}
-              <td><input name='price' className={classes.table_input} type='text' value={inputValue.price } onChange={handleChange}/></td>
-              <td><input disabled name='sales' className={classes.table_input} type='text' value={inputValue.sales } onChange={handleChange}/></td>
-              <td><input  name='numberInStock'  className={classes.table_input} type='text' value={inputValue.numberInStock } onChange={handleChange}/></td>
+              <td><input name='price' className='table_input' type='text' value={inputValue.price } onChange={handleChange}/></td>
+              <td><input disabled name='sales' className='table_input' type='text' value={inputValue.sales } /></td>
+              <td><input  name='numberInStock'  className='table_input' type='text' value={inputValue.numberInStock } onChange={handleChange}/></td>
               <td>
-                <select  name='onSale' id='table-select' className={classes.table_select} value={inputValue.onSale }  onChange={handleChange}>
+                <select  name='onSale' id='table-select' className='table_select' value={inputValue.onSale }  onChange={handleChange}>
                   <option value='' />
                   <option className='opt' value={1} >上架</option>
                   <option className='opt' value={0} >下架</option>
@@ -169,7 +178,8 @@ function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts})
             </tr>
           </tbody>
         </table>
-        <div className={classes.form_btn}>
+        <div className='form_btn'>
+          <button type='button' className='btn btn-success' onClick={cleanInput}>清空</button>
           <button type='submit' className='btn btn-primary'>儲存</button>
         </div>
            
