@@ -17,7 +17,6 @@ function CardItems({item}) {
                     <div className="cards__item__sales" >銷售量:<span className="cards__item__sales_num">{item.sales}</span></div>
                   </div>
                 </div>
-           
         </li>
     </>
   )

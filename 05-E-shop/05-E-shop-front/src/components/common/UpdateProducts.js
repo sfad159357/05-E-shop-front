@@ -5,10 +5,11 @@ import { TableHeader } from './TableHeader';
 import { saveProduct, getProduct } from '../service/productsService'
 import { toast } from 'react-toastify';
 
-function UpdateProducts({ columns, categories, update, onUpdate }) {
+function UpdateProducts({ columns, categories, onUpdate ,productId, dbProducts}) {
   
 
   const [inputValue, setInputValue] = useState({
+        _id:'',
         title: '',
         src:'',
         categoryId: '',
@@ -17,10 +18,28 @@ function UpdateProducts({ columns, categories, update, onUpdate }) {
         price: '',
         onSale: ''
   })
+
+  // 點選table商品名，其input值更改為被點商品各屬性值
+  useEffect(() => {
+    if (productId) {
+      let productClicked = dbProducts.find(product => product._id === productId)
+      setInputValue({
+        _id:productClicked._id,
+        title: productClicked.title,
+        src: productClicked.src,
+        categoryId: productClicked.category._id,
+        numberInStock: productClicked.numberInStock,
+        sales: productClicked.sales,
+        price: productClicked.price,
+        onSale: productClicked.onSale
+      })
+    }
+  },[productId]
+  )
+
+  // 進行淺複製，才不會一起連動同一個物件
   const inputData = { ...inputValue }
   
-    console.log('inputValue', inputValue)
-
   const navigate = useNavigate();
 
   const isSimpleHeader = true;
@@ -52,30 +71,13 @@ function UpdateProducts({ columns, categories, update, onUpdate }) {
 
 
    
-  
-
-   const mapToViewModel = (product) => {
-    // 已存在的product，其state中的data有_id屬性
-    return {
-      _id: product._id,
-      title: product.title,
-      categoryId: product.category._id,
-      src:product.src,
-      numberInStock: product.numberInStock,
-      sales: product.sales,
-      price: product.price,
-      onSale: product.onSale
-    };
-  }
-
   const doSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log('doSubmit', inputValue)
       await saveProduct(inputValue); // 將前端的data儲存到後端，函式會幫助再將前端data的欄位格式轉換成後台需要的格式
-      toast.success(`已成功更新${inputValue.title}`);
-      onUpdate()
-      setInputValue({
+      setInputValue({ // 儲存以後input內清空
+        _id:'',
         title: '',
         src:'',
         categoryId: '',
@@ -84,6 +86,8 @@ function UpdateProducts({ columns, categories, update, onUpdate }) {
         price: '',
         onSale: 0
       })
+      onUpdate() // 使其能夠重新更新母元件，使其重新抓db的資料下來
+      toast.success(`已成功更新${inputValue.title}`);
     } catch (ex) {
       console.log('ex',ex)
       if (ex) toast.error("錯誤：無法更新此product");
@@ -133,7 +137,7 @@ function UpdateProducts({ columns, categories, update, onUpdate }) {
   console.log('UpdateProducts render')
 
   return (
-      <div>
+      <>
       <form className={classes.form} onSubmit={doSubmit}>
         <table className="table table-striped mt-4 md-4"> 
           <TableHeader columns={columns} isSimpleHeader={isSimpleHeader} />
@@ -170,7 +174,7 @@ function UpdateProducts({ columns, categories, update, onUpdate }) {
         </div>
            
           </form>
-      </div>
+      </>
   )
 }
 

@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Table from "./Table";
-import Like from "./Like";
-import { Link } from "react-router-dom";
-import auth from "../service/authService";
 import paginate from "../../utils/paginate";
 import CategoryBar from "./CategoryBar";
 import SearchBox from "./SearchBox";
-import SortedBar from "./SortedBar";
 import _ from 'lodash'
 import Pagination from "./Pagination"; 
 import './ProductsTable.css'

@@ -24,7 +24,7 @@ export async function saveProduct(product) {
     // productInDb._id = Date.now().toString(); // 幫我們新增沒有新product的Id，若沒有新增toString()則無法進去編輯新product
     return await http.post(apiEndpoint, product).catch(e => { console.log(e)});
   }
-
+  
   // update old product
   const body = { ...product }; // 物件淺複製，新增記憶體位置
   delete body._id;

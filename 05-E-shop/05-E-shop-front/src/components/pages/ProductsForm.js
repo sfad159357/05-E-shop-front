@@ -8,7 +8,9 @@ import { getProducts } from '../service/productsService'
 function ProductsForm({ user, categories }) {
   
   const [dbProducts, setDbProducts] = useState([])
-  const [update , setUpdate] = useState(0)
+  const [update, setUpdate] = useState(0)
+  const [productId, setProductId] = useState('')
+
   
   const populateProducts = async () => {
     const { data: products } = await getProducts()
@@ -17,6 +19,10 @@ function ProductsForm({ user, categories }) {
 
   const handleUpdate = () => {
     setUpdate(update => update + 1)
+  }
+
+  const handleProductId = (id) => {
+    setProductId(id)
   }
 
   useEffect(() => {
@@ -28,11 +34,12 @@ function ProductsForm({ user, categories }) {
       path: "title",
       label: "商品名稱",
       content: (product) => (
-        <Link
-          to={`/products/${product._id}`} // 作者要的
+        <a
+          onClick={() => { handleProductId(product._id) }}
+          href='#update-div'
         >
           {product.title}
-        </Link>
+        </a>
       ),
     },
     { path: "src", label: "圖片", content: (product) => <img className='table-img' src={product.src} alt={product.title} /> },
@@ -51,13 +58,16 @@ function ProductsForm({ user, categories }) {
 
   return (
     <>
-      <h1 className="ProductsForm">ProductsForm</h1>
+      <h1 id='update-div' className="ProductsForm">ProductsForm</h1>
       <UpdateProducts
         user={user}
         columns={columns}
         categories={categories}
         update={update}
-        onUpdate={handleUpdate} />
+        onUpdate={handleUpdate}
+        productId={productId}
+        dbProducts={dbProducts}
+      />
       <ProductTable
         user={user}
         columns={columns}
