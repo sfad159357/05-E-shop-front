@@ -25,16 +25,16 @@ export async function register(user) {
   localStorage.setItem(token, res.headers["x-auth-token"]);
 }
 
-export function getAuthUser() {
+export  function getAuthUser() {
   try {
-    const jwt = localStorage.getItem(token);
+    const jwt =  localStorage.getItem(token);
     return jwtDecode(jwt); // user物件
   } catch (ex) {
     return null;
   }
 }
 
-export function logout() {
+export  function logout() {
   localStorage.removeItem(token);
 }
 

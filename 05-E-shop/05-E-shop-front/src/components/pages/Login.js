@@ -3,15 +3,20 @@ import Joi from "joi-browser";
 import Form2 from "../common/Form2";
 import auth from "../service/authService";
 import Home from './Home'
+import { useNavigate } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
-function Login() {
+
+function Login({setUser}) {
 
   // const data = {
       //  email: email_value,
       // password: password_value
   
   
-  const [errors, setErrors ] = useState({})
+  const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
+  const {addToast} = useToasts()
 
   const schema = {
         email: Joi.string().required().label("email"), // label可以更改跳出error時的欄位名稱
@@ -24,7 +29,9 @@ function Login() {
     // console.log("location state", state);
     try {
       await auth.login(data);
-      window.location = '/'
+      let user = auth.getAuthUser()
+      setUser(user)
+      navigate('/', {state:'login'})
     //   this.props.history.push("/"); // 我們不要子元件的跳轉，因為這無法讓App.js呼叫CMD，也就是需要母元件被重新載入
       // 如果訪客要訪問被保護元件，而Route的props有記錄被保護元件的location當前位置，所以如果從被保護元件過來，登入後返回被保護元件。
       // 但不一定都是從被保護元件點進login，所以返回"/"首頁
@@ -32,9 +39,15 @@ function Login() {
     } catch (ex) {
       console.log("ex", ex.response);
       if (ex.response && ex.response.status === 400) {
-        errors.email = ex.response.data;
+        errors.message = ex.response.data;
+        console.log('errors',errors)
         setErrors(errors);
-        alert('login errors',errors)
+        addToast(`登入失敗：${errors.message}`,
+          {
+            appearance: 'error',
+            autoDismiss:true
+          }
+        )
       }
     }
   };

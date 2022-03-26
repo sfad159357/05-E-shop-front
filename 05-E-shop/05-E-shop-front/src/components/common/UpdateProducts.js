@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState} from 'react'
+import {  useEffect, useState} from 'react'
 import './UpdateProducts.css'
-import {useNavigate } from 'react-router-dom';
+// import {useNavigate } from 'react-router-dom';
 import { TableHeader } from './TableHeader';
-import { saveProduct, getProduct } from '../service/productsService'
-import { toast } from 'react-toastify';
+import { saveProduct } from '../service/productsService'
+import { useToasts } from "react-toast-notifications";
 
 function UpdateProducts({
   columns,
@@ -11,9 +11,9 @@ function UpdateProducts({
   onUpdate,
   productId,
   handleProductId,
-  dbProducts }) {
-  
+  dbProducts })
 
+{
   const [inputValue, setInputValue] = useState({
       _id:'',
       title: '',
@@ -43,38 +43,17 @@ function UpdateProducts({
   },[productId]
   )
 
+  const { addToast } = useToasts();
+
   // 進行淺複製，才不會一起連動同一個物件
   const inputData = { ...inputValue }
   
-  const navigate = useNavigate();
-
+    // 讓TableHeader省略一些功能
   const isSimpleHeader = true;
 
     //  把'全部種類篩掉'
   const categoriesFiltered = categories.filter(category => category._id !== 0)
-
-
-  // useEffect(() => {
-    // try {
-      // 利用Route path="{url}"中的:id來取得參數
-      // const productId = this.props.match.params.id;
-      // if (productId === "new") return; // 如果電影是新增的，則不繼續執行下面的code，也就是一開始沒有_id這個屬性。
-      // 上一行的會加個return，是為了不讓不存在的product去執行setState
-
-      // 取得成功就setState，取得失敗就不會執行setState，而是catch error
-      // const { data: product } =  getProduct(productId);
-      // setChosenProduct(mapToViewModel(product))
-        // 由於前端需要的欄位格式跟後端給的data有點不同，我們欄位不想要有巢狀型態，所以需要在前端對data進行一些微調
-    // } catch (ex) {
-    //   console.log('update ex',ex)
-      // if (ex.response && ex.response.status === 404)
-        // this.props.history.replace("/not-found");
-      // 如果product get不到，會出現error 404，直接跳至replace，不用push則是因為不讓使用者可以點擊上一頁回去
-  //   }
-    
-  // },[])
   
-
   const cleanInput = () => {
       handleProductId('')
       setInputValue({ // 儲存以後input內清空
@@ -92,58 +71,52 @@ function UpdateProducts({
   const doSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(!inputValue._id) delete inputValue._id
+      if(!inputValue._id) delete inputValue._id 
       await saveProduct(inputValue); // 將前端的data儲存到後端，函式會幫助再將前端data的欄位格式轉換成後台需要的格式
       cleanInput()
       onUpdate() // 使其能夠重新更新母元件，使其重新抓db的資料下來
-      toast.success(`已成功更新${inputValue.title}`);
+      addToast(
+        `已成功更新「${inputValue.title}」`, {
+          appearance: "success",
+          autoDismiss:true
+      });
     } catch (ex) {
-      console.log('ex',ex)
-      if (ex) toast.error("錯誤：無法更新此product");
+      if (ex)  addToast(
+        `錯誤，由於「${ex}」，無法更新此product`, {
+          appearance: "error",
+          autoDismiss:true
+      });
     }
   };
 
-  const handleChange = ({ target: input }) => {
-    // 必須進行淺複製，因為inputValue無法被直接修改，直接data=inputValue無法被修改
-    
-    if (input.name === 'price' ||
-      input.name === 'numberInStock' ||
-      input.name === 'onSale')
-    {
+  const handleChange = ({ target: input }) => {    
+    if (input.name === 'price' || input.name === 'numberInStock' || input.name === 'onSale'){
       let value = Number(input.value)
-      console.log('value', value)
       inputData[input.name] = value
     }
     else { inputData[input.name] = input.value }
 
-    console.log('inputData',inputData)
     setInputValue(inputData)
-   
   }
 
   // 要傳遞NewMeetupForm的表單內所整理的json data
-  function addMeetupHandler(meetupData) {
+  // function addMeetupHandler(meetupData) {
     // fetch()是內建於javascript，跟react無關
     // 後面的字段加入後，firebase就會幫你建立collection以及table，後面的.json是firebase需要的
     // 參2是個{}物件，可以配置fetch的方法、以及要儲存的data
-    fetch('https://react-backend-25f08-default-rtdb.asia-southeast1.firebasedatabase.app/meetups.json',
-    {
-      method: 'POST',
-      body: JSON.stringify(meetupData), // 要先將物件字串化才能傳送
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    ).then(() => {
-      navigate('/')
-    })
+  //   fetch('https://react-backend-25f08-default-rtdb.asia-southeast1.firebasedatabase.app/meetups.json',
+  //   {
+  //     method: 'POST',
+  //     body: JSON.stringify(meetupData), // 要先將物件字串化才能傳送
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  //   ).then(() => {
+  //     navigate('/')
+  //   })
     
-  }
-
-  // 讓TableHeader省略一些功能
-
-
-  console.log('UpdateProducts render', inputValue)
+  // }
 
   return (
       <>

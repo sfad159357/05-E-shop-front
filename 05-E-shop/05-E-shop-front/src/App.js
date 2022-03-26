@@ -10,6 +10,7 @@ import auth from './components/service/authService'
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
 import { getProducts } from './components/service/productsService'
 import { getCategories } from './components/service/categoryService'
+import { ToastProvider } from 'react-toast-notifications';
 import './App.css';
 
 
@@ -18,12 +19,10 @@ function App() {
   
   const [onSaleProducts, setOnSaleProducts] = useState([])
   const [categories, setCategories] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
 
   const populateProducts = async () => {
     const { data: products } = await getProducts()
-      console.log('onSaleProducts',products)
-
 
     // 篩選掉「未上架」和「庫存為0」的商品
     const productsOnSale =  products.filter(product => (product.onSale === 1) && (product.numberInStock !== 0))
@@ -35,28 +34,36 @@ function App() {
     categoriesArray = [{_id:0,name:'全部種類'}, ...categoriesArray]
     setCategories(categoriesArray)
   } 
+
+
   
   useEffect(() => {
-     const _user = auth.getAuthUser();
-    setUser(_user);
     populateCategories()
     populateProducts()
-
+    const _user = auth.getAuthUser();
+    setUser(_user);
   }, [])
+  
+  console.log('App render')
+        console.log('onSaleProducts',onSaleProducts)
+
+  
+
 
   return (
+    <ToastProvider>
     <BrowserRouter>
       <Navbar user={user}/>
       <Routes>
-        <Route path="/" element={<Home originProducts={onSaleProducts} />} />
-        <Route path="/products" element={<Products originProducts={onSaleProducts} categories={ categories}/>} />
+        <Route path="/" element={<Home onSaleProducts={onSaleProducts} user={user} />} />
+        <Route path="/products" element={<Products onSaleProducts={onSaleProducts} categories={ categories}/>} />
         <Route path="/update-products" element={<ProductsForm user={user} categories={ categories}/>} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/logout" element={<Logout />} />
+          <Route path="/login" element={<Login setUser={setUser}/>} />
+          <Route path="/logout" element={<Logout setUser={setUser}/>} />
       </Routes>
-
-    </BrowserRouter>
+      </BrowserRouter>
+    </ToastProvider>
   );
 }
 // export { MyContext };

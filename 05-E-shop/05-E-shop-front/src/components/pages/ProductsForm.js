@@ -3,7 +3,9 @@ import '../../App.css'
 import ProductTable from '../common/ProductsTable'
 import UpdateProducts from '../common/UpdateProducts'
 import { Link } from 'react-router-dom'
-import { getProducts, deleteProduct} from '../service/productsService'
+import { getProducts, deleteProduct } from '../service/productsService'
+import { useToasts } from "react-toast-notifications";
+
 
 function ProductsForm({ user, categories }) {
   
@@ -11,6 +13,7 @@ function ProductsForm({ user, categories }) {
   const [update, setUpdate] = useState(0)
   const [productId, setProductId] = useState('')
 
+  const { addToast } = useToasts()
   
   const populateProducts = async () => {
     const { data: products } = await getProducts()
@@ -33,9 +36,15 @@ function ProductsForm({ user, categories }) {
           <button
             type="submit"
             className="btn btn-danger btn-sm"
-            onClick={() => {
-              deleteProduct(product._id);
+            onClick={async () => {
+              await deleteProduct(product._id);
               handleUpdate();
+              addToast(`已成功刪除「${product.title}」`,
+                {
+                  appearance: "success",
+                  autoDismiss:true
+                }
+              )
             }}
           >
             刪除

@@ -1,15 +1,23 @@
-import { Component } from "react";
+import { Component,useEffect } from "react";
 import auth from "../service/authService";
+import { useLocation, useNavigate,Link } from "react-router-dom";
 
-export class Logout extends Component {
-  componentDidMount() {
+function Logout({setUser}) {
+  
+  const location = useLocation()
+  const navigate = useNavigate()
+  
+  useEffect( () => {  
+    console.log('Logout location', location)
     auth.logout();
-    window.location = "/";
-  }
-
-  render() {
-    return null;
-  }
+    setUser(null)
+    navigate('/',{state:'logout'})      
+    // window.location = "/";
+  },[])
+  
+  
+  return null
+ 
 }
 
 export default Logout;

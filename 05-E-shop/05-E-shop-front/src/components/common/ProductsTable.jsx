@@ -19,7 +19,7 @@ function ProductTable({ user, dbProducts, categories,columns  }) {
   const [sortedColumn, setSortedColumn] = useState( {path: "title", order: "asc" })
 
 
-    if (user && user.isAdmin) this.columns.push(this.deleteColumn());
+    // if (user && user.isAdmin) this.columns.push(this.deleteColumn());
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

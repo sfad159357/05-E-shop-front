@@ -11,33 +11,14 @@ import SearchBox from '../common/SearchBox'
 import { getProducts } from '../service/productsService'
 import { getCategories } from '../service/categoryService'
 
-function Products({ originProducts,categories}) {
+function Products({ onSaleProducts,categories}) {
   
 
-  // const [originProducts, setOriginProducts] = useState([])
-  // const [categories, setCategories] = useState([])
   const [pageSize, setPageSize] = useState(8)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState({_id: 0 , name: '全部種類' })
   const [priceOrder, setPriceOrder] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
-
-
-  // const populateProducts = async () => { 
-  //   const { data: productsArray } = await getProducts()
-  //   setOriginProducts(productsArray)
-  // }
-
-  // const populateCategories = async () => {
-  //   const { data: categoriesArray } = await getCategories()
-  //   setCategories(categoriesArray)
-  // }
-
-  //  useEffect(() => {
-  //   console.log('useEffect')
-  //   populateProducts()
-  //   populateCategories()
-  // },[])
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -61,19 +42,16 @@ function Products({ originProducts,categories}) {
 
   }
   
+  // 計算產品的長度
+  const itemsCount = onSaleProducts.length
 
-  const itemsCount = originProducts.length
-
-  
-  let categorySortedData = originProducts;
-
+  let categorySortedData = onSaleProducts;
   if (categories && selectedCategory.name !== '全部種類') {
-     categorySortedData = originProducts.filter( data => data.category.name === selectedCategory.name)  
+     categorySortedData = onSaleProducts.filter( data => data.category.name === selectedCategory.name)  
   } 
   
 
   let priceSortedData = categorySortedData
-  
   // 在priceOrder被選擇後，才會開始篩選
   if (priceOrder) {
     priceSortedData = _.orderBy(
@@ -87,9 +65,7 @@ function Products({ originProducts,categories}) {
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
 
-  if(paginatedData)
 
-  console.log('categorySortedData',categorySortedData)
 
 
   return (
@@ -121,7 +97,6 @@ function Products({ originProducts,categories}) {
             onCategoryChange={handleCategorySelect}
           />
       }
-      
       <Footer />
     </>
   )
