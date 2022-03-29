@@ -26,3 +26,8 @@
 .cart-sum-number{
     color:brown
 }
+
+.cards__item__cart button:hover{
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 1px 1px  #666;
+}

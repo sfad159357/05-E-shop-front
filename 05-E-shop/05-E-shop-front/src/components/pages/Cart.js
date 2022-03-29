@@ -7,14 +7,8 @@ import Counter from '../common/Counter';
 function Cart() {
 
     const { cart } = useContext(CartContext)
-    // const { newCart, setNewCart } = useState(cart)
-    console.log('Cart cart', cart)
-    // console.log('Cart NewCart', newCart)
 
-    useEffect(() => {
-        
-    },[cart])
-
+   
     const sumUp = (acc, cur) => {
         acc += cur.count * cur.price
         return acc

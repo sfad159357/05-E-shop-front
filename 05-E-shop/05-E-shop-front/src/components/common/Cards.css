@@ -160,7 +160,18 @@ h1 {
   background-color: #efe;
 }
 
-.cards__item__cart button:hover{
+.cards__item__cart__number{
+
+}
+
+/* 取消掉input的預設的上下箭頭 */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.count button:hover{
   transform: translateX(-1px) translateY(-1px);
   box-shadow: 1px 1px  #666;
 }

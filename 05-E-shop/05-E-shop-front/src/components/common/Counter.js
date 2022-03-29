@@ -15,13 +15,12 @@ export default function Counter({item }) {
     // 如果沒有淺複製array，react無法辨別巢狀物件內值的改變
     // 因為物件所參照的位置一樣，導致更新狀態時，前面的cart state也連同一起被修改，故無法區分出來
     setCart([...cart])
-    
   },[num])
 
 
   const handleInput = (e) => {
     if (e.target.value < 0) setNum(1)
-    else { setNum(e.target.value) }
+    else { setNum(parseInt(e.target.value)) }
     
   }
 
@@ -40,7 +39,7 @@ export default function Counter({item }) {
   return (
       <>
         <button className='cards__item__cart__minus' onClick={handleMinus}>-</button>
-        <input className='cards__item__cart__number' value={num} onChange={handleInput} />
+        <input className='cards__item__cart__number' type='number' value={num} onChange={handleInput} />
         <button className='cards__item__cart__plus' onClick={handlePlus}>+</button>
     </>
   )

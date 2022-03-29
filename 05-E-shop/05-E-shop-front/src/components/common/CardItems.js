@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react'
 import { CartContext } from '../../App'
 import {Link} from 'react-router-dom'
-import Counter from './Counter'
 
 function CardItems({ item }) {
   
@@ -11,7 +10,10 @@ function CardItems({ item }) {
 
   const handleInput = (e) => {
     if (e.target.value < 0) setNum(1)
-    else { setNum(e.target.value) }
+    else {
+      // input輸入的數字會轉為string
+      setNum(parseInt(e.target.value))
+    }
   }
 
   const handleMinus = () => {
@@ -27,8 +29,12 @@ function CardItems({ item }) {
   const handleCart = () => {
     let repeatedProduct = cart.find(product => product._id === item._id)
     // 假設重複選取同個商品，數量增加就好，若購物車找不到同樣的_id，就為undefined
-    if (repeatedProduct) {
+    if (repeatedProduct) { // repeatedProduct.count 型別是string!!
+      console.log('repeatedProduct1', repeatedProduct.count ,typeof(repeatedProduct.count))
+      console.log('num',num, typeof(num))
+      repeatedProduct.count = parseInt(repeatedProduct.count)
       repeatedProduct.count += num
+      console.log('repeatedProduct2', repeatedProduct.count,typeof(repeatedProduct.count))
     }
     else {
       cart.push({
@@ -62,7 +68,7 @@ function CardItems({ item }) {
                    </div>
                   <div className="cards__item__cart">
                   <button className='cards__item__cart__minus' onClick={handleMinus}>-</button>
-                  <input className='cards__item__cart__number' value={num} onChange={handleInput} />
+                  <input className='cards__item__cart__number' type='number'  value={num} onChange={handleInput} />
                   <button className='cards__item__cart__plus' onClick={handlePlus}>+</button>
                     <button className='cards__item__cart__addCart' onClick={handleCart}>加入購物車</button>
                   </div>
