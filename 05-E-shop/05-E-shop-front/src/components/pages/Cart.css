@@ -1,0 +1,28 @@
+.cart-table-container{
+    margin: 0px 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-table-container td{
+    vertical-align: middle
+}
+
+.cart-table-container .title{
+    font-size: 20px;
+}
+
+.cart-hr{
+    border: 1px solid black;
+    opacity: 1;
+}
+
+.cart-sum{
+    align-self: end;
+    font-size: 25px;
+    padding-right: 20px;
+}
+
+.cart-sum-number{
+    color:brown
+}

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect, createContext } from 'react';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home'
 import Products from './components/pages/Products'
@@ -6,6 +6,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Logout from './components/pages/Logout';
 import ProductsForm from './components/pages/ProductsForm';
+import Cart from './components/pages/Cart'
 import auth from './components/service/authService'
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
 import { getProducts } from './components/service/productsService'
@@ -14,12 +15,15 @@ import { ToastProvider } from 'react-toast-notifications';
 import './App.css';
 
 
+export const CartContext = createContext()
+
 
 function App() {
   
   const [onSaleProducts, setOnSaleProducts] = useState([])
   const [categories, setCategories] = useState([])
   const [user, setUser] = useState(null)
+  const [cart, setCart] = useState([])
 
   const populateProducts = async () => {
     const { data: products } = await getProducts()
@@ -35,8 +39,6 @@ function App() {
     setCategories(categoriesArray)
   } 
 
-
-  
   useEffect(() => {
     populateCategories()
     populateProducts()
@@ -44,13 +46,12 @@ function App() {
     setUser(_user);
   }, [])
   
-  console.log('App render')
-        console.log('onSaleProducts',onSaleProducts)
-
+  console.log('App cart', cart)
   
 
 
   return (
+    <CartContext.Provider value={{ cart, setCart }}>
     <ToastProvider>
     <BrowserRouter>
       <Navbar user={user}/>
@@ -59,12 +60,14 @@ function App() {
         <Route path="/products" element={<Products onSaleProducts={onSaleProducts} categories={ categories}/>} />
         <Route path="/update-products" element={<ProductsForm user={user} categories={ categories}/>} />
         <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login setUser={setUser}/>} />
-          <Route path="/logout" element={<Logout setUser={setUser}/>} />
+        <Route path="/login" element={<Login setUser={setUser}/>} />
+        <Route path="/logout" element={<Logout setUser={setUser} />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       </BrowserRouter>
-    </ToastProvider>
+      </ToastProvider>
+    </CartContext.Provider>
   );
 }
-// export { MyContext };
+
 export default App;

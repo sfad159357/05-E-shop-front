@@ -7,7 +7,7 @@ function HeroSection() {
   return (
       <div className='hero-container'>
       <video src='/videos/video-1.mp4' autoPlay loop muted />
-        <h1>Adventure旅遊網站</h1>
+        <h1>TRVL電子商城網站</h1>
         <p>心動不如馬上行動</p>
         <div className='hero-btns'>
           <Button buttonStyle='btn--outline' buttonSize='btn--large'>

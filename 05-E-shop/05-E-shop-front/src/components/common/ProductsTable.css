@@ -28,6 +28,10 @@
     vertical-align: middle
 }
 
+.table-container .title{
+    font-size: 20px;
+}
+
 .pagination{
     display: flex;
     justify-content: center;

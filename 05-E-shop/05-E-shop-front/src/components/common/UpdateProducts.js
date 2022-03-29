@@ -99,24 +99,6 @@ function UpdateProducts({
     setInputValue(inputData)
   }
 
-  // 要傳遞NewMeetupForm的表單內所整理的json data
-  // function addMeetupHandler(meetupData) {
-    // fetch()是內建於javascript，跟react無關
-    // 後面的字段加入後，firebase就會幫你建立collection以及table，後面的.json是firebase需要的
-    // 參2是個{}物件，可以配置fetch的方法、以及要儲存的data
-  //   fetch('https://react-backend-25f08-default-rtdb.asia-southeast1.firebasedatabase.app/meetups.json',
-  //   {
-  //     method: 'POST',
-  //     body: JSON.stringify(meetupData), // 要先將物件字串化才能傳送
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }
-  //   ).then(() => {
-  //     navigate('/')
-  //   })
-    
-  // }
 
   return (
       <>

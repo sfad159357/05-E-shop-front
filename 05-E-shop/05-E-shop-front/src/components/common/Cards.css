@@ -30,7 +30,7 @@ h1 {
   width: 100%;
   grid-template-columns:  repeat(4, 1fr);
   /* height: 500px; */
-  grid-auto-rows: 380px;
+  grid-auto-rows: 400px;
 
   margin-bottom: 24px;
 }
@@ -102,7 +102,7 @@ h1 {
 }
 
 .cards__item__info {
-  padding: 10px 30px 30px;
+  padding: 10px 20px ;
 }
 
 .cards__item__text {
@@ -116,11 +116,55 @@ h1 {
   justify-content: space-between; 
 }
 
-
+.cards__item__price{
+  font-size: 20px;
+}
 
 .cards__item__sales_num{
   color:#f33
 }
+
+.cards__item__cart{
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards__item__cart__addCart{
+  justify-self: end;
+}
+
+.cards__item__cart__number{
+  width: 50px;
+}
+
+.cards__item__cart__minus,
+.cards__item__cart__number,
+.cards__item__cart__plus,
+.cards__item__cart__addCart{
+  display: inline;
+  margin: 0px;
+  padding: 0px 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.cards__item__cart__minus{
+  background-color: #fdd;
+}
+
+.cards__item__cart__plus{
+  background-color: #cff;
+}
+
+.cards__item__cart__addCart{
+  background-color: #efe;
+}
+
+.cards__item__cart button:hover{
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 1px 1px  #666;
+}
+
 
 @media only screen and (max-width: 768px) {
   .content__blog__container {

@@ -51,6 +51,9 @@ function Navbar({ user }) {
                   <li className="nav-item">
                       <Link to='/products' className='nav-links' onClick={closeMobileMenu}>產品內容</Link>
                   </li>
+                  <li className="nav-item">
+                      <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>我的購物車</Link>
+                  </li>
                   {user && (
                       <>
                   <li className="nav-item">
