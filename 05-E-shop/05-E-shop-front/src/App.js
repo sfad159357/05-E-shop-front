@@ -6,6 +6,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Logout from './components/pages/Logout';
 import ProductsForm from './components/pages/ProductsForm';
+import Checkout from './components/pages/Checkout';
 import Cart from './components/pages/Cart'
 import auth from './components/service/authService'
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
@@ -52,7 +53,7 @@ function App() {
 
   return (
     <CartContext.Provider value={{ cart, setCart }}>
-    <ToastProvider>
+      <ToastProvider autoDismiss={true}>
     <BrowserRouter>
       <Navbar user={user}/>
       <Routes>
@@ -63,6 +64,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/logout" element={<Logout setUser={setUser} />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       </BrowserRouter>
       </ToastProvider>

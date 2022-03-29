@@ -83,8 +83,7 @@ function UpdateProducts({
     } catch (ex) {
       if (ex)  addToast(
         `錯誤，由於「${ex}」，無法更新此product`, {
-          appearance: "error",
-          autoDismiss:true
+          appearance: "error"
       });
     }
   };

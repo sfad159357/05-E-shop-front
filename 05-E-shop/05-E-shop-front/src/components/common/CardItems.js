@@ -1,12 +1,16 @@
 import { useState, useContext } from 'react'
 import { CartContext } from '../../App'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications';
+
 
 function CardItems({ item }) {
   
   const [num, setNum] = useState(1)
 
-  const { cart } = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext)
+
+  const {addToast} = useToasts()
 
   const handleInput = (e) => {
     if (e.target.value < 0) setNum(1)
@@ -30,11 +34,8 @@ function CardItems({ item }) {
     let repeatedProduct = cart.find(product => product._id === item._id)
     // 假設重複選取同個商品，數量增加就好，若購物車找不到同樣的_id，就為undefined
     if (repeatedProduct) { // repeatedProduct.count 型別是string!!
-      console.log('repeatedProduct1', repeatedProduct.count ,typeof(repeatedProduct.count))
-      console.log('num',num, typeof(num))
       repeatedProduct.count = parseInt(repeatedProduct.count)
       repeatedProduct.count += num
-      console.log('repeatedProduct2', repeatedProduct.count,typeof(repeatedProduct.count))
     }
     else {
       cart.push({
@@ -47,10 +48,12 @@ function CardItems({ item }) {
       })
     }
     setNum(1)
-  }
-
- 
-
+    setCart([...cart])
+    addToast(`已成功將「${item.title}」「${num}項」加到購物車`,
+      {
+        appearance: "success",
+      })
+}
   
   return (
     <>

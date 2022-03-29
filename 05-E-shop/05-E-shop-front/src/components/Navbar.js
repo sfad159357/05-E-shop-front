@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom'
-import Button  from './common/Button'
+import Button from './common/Button'
+import { CartContext } from '../App'
 import './Navbar.css'
 
 function Navbar({ user }) {
-    console.log('user',user)
     
     const style = { color: "yellow" };
     const activestyle = {
@@ -13,7 +13,9 @@ function Navbar({ user }) {
     };
 
     const [clicked, setClicked] = useState(false)
-    const [hasButton, setButton] = useState(true)
+  const [hasButton, setButton] = useState(true)
+  
+    const {cart} = useContext(CartContext)
 
     // 只要點擊，原本是false set為true，是true set為false
     const handleClick = () => setClicked(!clicked)
@@ -51,8 +53,9 @@ function Navbar({ user }) {
                   <li className="nav-item">
                       <Link to='/products' className='nav-links' onClick={closeMobileMenu}>產品內容</Link>
                   </li>
-                  <li className="nav-item">
-                      <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>我的購物車</Link>
+                <li className="nav-item">
+                      <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>購物車</Link>
+                      <span class="position-relative translate-middle badge rounded-pill bg-danger">{cart.length  }</span>
                   </li>
                   {user && (
                       <>
