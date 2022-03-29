@@ -3,7 +3,6 @@ import '../../App.css'
 import Cards from '../common/Cards'
 import Footer from '../Footer'
 import HeroSection from '../HeroSection'
-import paginate from '../../utils/paginate'
 import _ from "lodash";
 import { useToasts } from "react-toast-notifications";
 import { useLocation } from 'react-router-dom';
@@ -11,13 +10,9 @@ import { useLocation } from 'react-router-dom';
 
 function Home({ onSaleProducts, user}) {
 
-  const [pageSize, setPageSize] = useState(8)
-  const [currentPage, setCurrentPage] = useState(1)
 
   const { addToast } = useToasts()
   const location = useLocation()
-  console.log('location', location)
-  console.log('onSaleProducts',onSaleProducts)
 
   useEffect(() => {
     // 透過login中的navigate傳來的state參數，來判斷上一頁是login
@@ -54,8 +49,6 @@ function Home({ onSaleProducts, user}) {
 
   // 只取前面8份
   salesSortedData = salesSortedData.slice(0, 8)
-  
-    
 
   return (
     <>
@@ -65,11 +58,8 @@ function Home({ onSaleProducts, user}) {
         data={salesSortedData}
         noPaginated={true}
       /> 
-      <Footer />
     </>
   )
-
-  
 }
 
 export default Home

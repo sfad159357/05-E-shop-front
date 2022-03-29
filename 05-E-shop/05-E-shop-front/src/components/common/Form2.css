@@ -4,8 +4,20 @@
     margin:auto;
     padding: 20px 40px;
     box-shadow: 2px 2px 5px #333;
+    position: relative;
 }
 
 .form-group .required{
     color:red;
 }
+
+
+.btn.btn-primary.mt-4 , .form2-p{
+    display: inline;
+}
+.form2-p{
+    margin-left: 20px;
+    position: relative;
+    left: 30%;
+    top:10px
+ }

@@ -1,13 +1,17 @@
-
 import {useState} from "react";
 import Joi from "joi-browser";
 import Form2 from "../common/Form2";
 import auth from "../service/authService";
 import Home from './Home'
+import { useToasts } from "react-toast-notifications";
+import { useNavigate } from 'react-router-dom';
+
 
 function Register() {
   
-  const [errors, setErrors ] = useState({})
+  const [errors, setErrors] = useState({})
+  const { addToast } = useToasts()
+  const navigate = useNavigate()
 
   const schema = {
     email: Joi.string().email().trim().required(),
@@ -27,23 +31,16 @@ function Register() {
   }
 
   const doSubmit = async (data) => {
-    // const { state } = this.props.location;
-    // console.log("location state", state);
+   
     try {
       await auth.register(data);
-      window.location = '/'
-
-    //   this.props.history.push("/"); // 我們不要子元件的跳轉，因為這無法讓App.js呼叫CMD，也就是需要母元件被重新載入
-      // 如果訪客要訪問被保護元件，而Route的props有記錄被保護元件的location當前位置，所以如果從被保護元件過來，登入後返回被保護元件。
-      // 但不一定都是從被保護元件點進login，所以返回"/"首頁
-    //   window.location = state ? state.from : "/";
+      navigate('/login', {state:'register'})
+      
     } catch (ex) {
-      console.log("ex", ex.response);
       if (ex.response && ex.response.status === 400) {
-        errors.response = ex.response.data;
-        errors.email = "此email已有人註冊過了";
-        setErrors(errors);
-        alert('register errors',errors)
+        errors.message  = ex.response.data;
+        setErrors(errors.message);
+        addToast(`註冊失敗：${errors.message}`,{appearance: 'error'})
       }
     }
   };
@@ -62,7 +59,8 @@ function Register() {
             { cpnt: 'Input', label:'密碼:',name: 'password', type:'password' ,placeholder:'請輸入密碼至少5碼以上' },
             { cpnt: 'Input', label:'確認密碼:',name: 'password2', type:'password' ,placeholder:'請與剛剛密碼輸入一致' },
             { cpnt: 'Input', label:'姓名:',name: 'name', type:'text' ,placeholder:'請輸入名字至少3個字元以上' },
-            { cpnt: 'Button', label:'提交',name: 'submit', type:'submit' }
+          { cpnt: 'Button', label: '提交', name: 'submit', type: 'submit' },
+            { cpnt: 'Link', label:'已經是會員了嗎？',name: '點我登入',path:'/login' }
 
         ]}
         schema={schema}

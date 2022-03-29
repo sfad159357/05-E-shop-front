@@ -55,7 +55,7 @@ function Navbar({ user }) {
                   </li>
                 <li className="nav-item">
                       <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>購物車</Link>
-                      <span class="position-relative translate-middle badge rounded-pill bg-danger">{cart.length  }</span>
+                      <span className="position-relative translate-middle badge rounded-pill bg-danger">{cart.length  }</span>
                   </li>
                   {user && (
                       <>

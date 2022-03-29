@@ -1,11 +1,12 @@
 import {  useEffect, useState} from 'react'
 import './UpdateProducts.css'
-// import {useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { TableHeader } from './TableHeader';
 import { saveProduct } from '../service/productsService'
 import { useToasts } from "react-toast-notifications";
 
 function UpdateProducts({
+  user,
   columns,
   categories,
   onUpdate,
@@ -14,6 +15,13 @@ function UpdateProducts({
   dbProducts })
 
 {
+  
+  const navigate = useNavigate()
+  if (!user) {
+    navigate('/login')
+  }
+
+  
   const [inputValue, setInputValue] = useState({
       _id:'',
       title: '',
@@ -24,6 +32,8 @@ function UpdateProducts({
       price: '',
       onSale: 1
   })
+
+  
 
   // 點選table商品名，其input值更改為被點商品各屬性值
   useEffect(() => {
@@ -42,6 +52,7 @@ function UpdateProducts({
     }
   },[productId]
   )
+
 
   const { addToast } = useToasts();
 

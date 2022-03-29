@@ -8,13 +8,11 @@ import CategoryBar from '../common/CategoryBar'
 import _ from "lodash";
 import SortedBar from '../common/SortedBar'
 import SearchBox from '../common/SearchBox'
-import { getProducts } from '../service/productsService'
-import { getCategories } from '../service/categoryService'
 
 function Products({ onSaleProducts,categories}) {
   
 
-  const [pageSize, setPageSize] = useState(8)
+  const pageSize = 8
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState({_id: 0 , name: '全部種類' })
   const [priceOrder, setPriceOrder] = useState('')
@@ -97,7 +95,6 @@ function Products({ onSaleProducts,categories}) {
             onCategoryChange={handleCategorySelect}
           />
       }
-      <Footer />
     </>
   )
 

@@ -1,22 +1,35 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Joi from "joi-browser";
 import Form2 from "../common/Form2";
 import auth from "../service/authService";
 import Home from './Home'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 
-function Login({setUser}) {
+function Login({user,setUser}) {
 
-  // const data = {
-      //  email: email_value,
-      // password: password_value
-  
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { addToast } = useToasts()
   
   const [errors, setErrors] = useState({})
-  const navigate = useNavigate()
-  const {addToast} = useToasts()
+
+
+  useEffect(() => {
+    if (location.state === 'cart') {
+      addToast('您需要先登入會員，才能進入購物車',
+      {appearance: 'info'}
+      )
+    }
+    if (location.state === 'register') {
+      addToast('您已成功註冊，請再輸入一次信箱和密碼來登入會員',
+      {appearance: 'success'}
+      )
+    }
+  },[location.state])
+
+    if (user) return <Home />
 
   const schema = {
         email: Joi.string().required().label("email"), // label可以更改跳出error時的欄位名稱
@@ -37,22 +50,15 @@ function Login({setUser}) {
       // 但不一定都是從被保護元件點進login，所以返回"/"首頁
     //   window.location = state ? state.from : "/";
     } catch (ex) {
-      console.log("ex", ex.response);
       if (ex.response && ex.response.status === 400) {
         errors.message = ex.response.data;
-        console.log('errors',errors)
         setErrors(errors);
-        addToast(`登入失敗：${errors.message}`,
-          {
-            appearance: 'error',
-            autoDismiss:true
-          }
+        addToast(`登入失敗：${errors.message}`,{appearance: 'error'}
         )
       }
     }
   };
 
-  if (auth.getAuthUser()) return <Home /> 
       
   // 假如訪客已經登入，就不要再讓訪客進入login頁面，直接返回首頁
       
@@ -64,16 +70,16 @@ function Login({setUser}) {
           cpnts={[
             { cpnt: 'Input', label:'電子信箱:',name: 'email' ,type:'email', placeholder:'請符合信箱格式，如abc@gmail.com'},
             { cpnt: 'Input', label:'密碼:',name: 'password', type:'password' ,placeholder:'請輸入密碼至少5碼以上' },
-            { cpnt: 'Button', label:'提交',name: 'submit', type:'submit' }
+          { cpnt: 'Button', label: '提交', name: 'submit', type: 'submit' },
+            { cpnt: 'Link', label:'還沒註冊嗎？',name: '點我註冊', path:'/register' }
+
 
         ]}
         schema={schema}
         onSubmit={doSubmit}
         errors={errors}
         />
-        {/* {this.renderInput("email", "Email")}
-        {this.renderInput("password", "Password", "password")}
-        {this.renderButton("Login")} */}
+        
       </>
     );
 }

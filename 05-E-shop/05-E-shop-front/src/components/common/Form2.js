@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Input from "./Input";
 import Select from "./Select";
+import { Link } from 'react-router-dom';
 import Joi from "joi-browser";
 import './Form2.css'
 
@@ -43,17 +44,14 @@ function Form2({ cpnts, onSubmit, schema, checkPassword, errors}) {
          // 假如errors是null就設errors就設{}，不然errors為null無法賦予key,value
            if (!errors) errors = {};
            errors['password2'] = checkPassword(data);
-           console.log('checkPassword(data)', checkPassword(data))
        }
-       else{delete data.password2} //密碼符合就可以刪除data.password2
-       console.log('errors', errors)
-       console.log('dataQQ',data)
+       //密碼符合就可以刪除data.password2
        setErrors2(errors)
  // 為了讓username和password能夠參照沒有error的errors<
     // -> 使用 || or選擇器，沒有errors，不要設null，而是{}狀態
     if (errors) return; // 如果有errors，就停止函式繼續往下執行
+        delete data.password2 
        onSubmit(data2);
-       console.log('onSubmit(data2);')
    };
     
    
@@ -61,7 +59,7 @@ function Form2({ cpnts, onSubmit, schema, checkPassword, errors}) {
     return (
         <form onSubmit={handleSubmit(schema, data2, checkPassword)} className='form2'>
         {cpnts.map(item => {
-            let { name, type,label,placeholder } = item
+            let { name, type,label,placeholder,path } = item
                 switch (item.cpnt) {
                     case 'Input':
                         return (
@@ -86,6 +84,13 @@ function Form2({ cpnts, onSubmit, schema, checkPassword, errors}) {
                                 className="btn btn-primary mt-4"
                                 // disabled={errors2} // 有值代表有error，為truthy，所以開啟disabled，取消submit功能
                             />)
+                    case 'Link':
+                        return (
+                            <p key={name} className='form2-p'>
+                            <span>{label}</span>
+                            <span><Link to={`${path}`}>{name}</Link></span>
+                            </p>
+                        )
                     default:
                         return <h3>沒有東西</h3>
 

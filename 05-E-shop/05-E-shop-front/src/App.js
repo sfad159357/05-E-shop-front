@@ -1,5 +1,6 @@
 import { useState,useEffect, createContext } from 'react';
 import Navbar from './components/Navbar'
+import Footer from './components/Footer';
 import Home from './components/pages/Home'
 import Products from './components/pages/Products'
 import Login from './components/pages/Login'
@@ -61,11 +62,12 @@ function App() {
         <Route path="/products" element={<Products onSaleProducts={onSaleProducts} categories={ categories}/>} />
         <Route path="/update-products" element={<ProductsForm user={user} categories={ categories}/>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login setUser={setUser}/>} />
-        <Route path="/logout" element={<Logout setUser={setUser} />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-      </Routes>
+          <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
+        <Route path="/cart" element={<Cart user={user} />} />
+        <Route path="/checkout" element={<Checkout user={user}/>} />
+          </Routes>
+        <Footer />
       </BrowserRouter>
       </ToastProvider>
     </CartContext.Provider>
