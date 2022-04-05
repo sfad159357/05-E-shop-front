@@ -21,3 +21,25 @@
     left: 30%;
     top:10px
  }
+
+ @media screen and (max-width: 568px) {
+     .form2{
+         width: 80%;
+         margin: auto;
+         margin-bottom: 20px;
+         padding: 20px 10px;
+     }
+
+     .form2-p{
+    margin-left: 0;
+    position: relative;
+    left: 10%;
+    top:10px
+    }
+
+    .btn.btn-primary.mt-4 {
+        margin: auto;
+        display: block;
+        width: 50%;
+    }
+ }

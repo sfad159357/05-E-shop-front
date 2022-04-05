@@ -1,4 +1,4 @@
-import {useContext,useEffect} from 'react'
+import {useContext,useEffect,useState} from 'react'
 import Table from '../common/Table'
 import { CartContext } from '../../App';
 import './Cart.css'
@@ -18,6 +18,7 @@ function Cart({ user }) {
             console.log('useEffect navigate')
         },[user])
 
+  const [sortedColumn, setSortedColumn] = useState( {path: "title", order: "asc" })
 
     const { cart, setCart } = useContext(CartContext)
 
@@ -30,7 +31,8 @@ function Cart({ user }) {
     }
 
     const deleteColumn = () =>{
-    return {
+      return {
+      path:"button",
       key: "delete",
       content: (item) => {
         return (
@@ -52,9 +54,8 @@ function Cart({ user }) {
         );
       },
     };
-  }
-
-    
+    }
+  
 
      const columns = [
        {
@@ -67,7 +68,11 @@ function Cart({ user }) {
         (item) => <Counter item={item} />
     },
     deleteColumn()
-    ]
+     ]
+  
+  const handleSort = (sortedColumn) => {
+    setSortedColumn(sortedColumn); // ascending升序
+  };
 
 
     return (
@@ -76,7 +81,8 @@ function Cart({ user }) {
         {cart.length
         ? (<div className='cart-table-container'>
             <Table
-            isSimpleHeader={true}
+              onSort={handleSort}
+              sortedColumn={sortedColumn}
             items={cart}
             columns={columns}
             />

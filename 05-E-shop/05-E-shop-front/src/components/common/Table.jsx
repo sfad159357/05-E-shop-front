@@ -9,22 +9,18 @@ export default function Table(props) {
   const adjust = () => {
     if (window.innerWidth < 568 && isLarge) {
       setLarge(false);
-      console.log('setLarge(false)', window.innerWidth, isLarge)
     }
     if (window.innerWidth > 568 && !isLarge)
     {
       setLarge(true);
-      console.log('setLarge(true)', window.innerWidth, isLarge)
     }
   }
 
   useEffect(() => {
     if (window.innerWidth < 568) {
       setLarge(false)
-      console.log('useEffect',window.innerWidth)
     }
   }, [])
-    console.log('isLarge', window.innerWidth ,isLarge)
 
   window.addEventListener('resize', adjust)
 
