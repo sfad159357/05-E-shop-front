@@ -1,5 +1,4 @@
 import {  useEffect, useState} from 'react'
-import './UpdateProducts.css'
 import {useNavigate } from 'react-router-dom';
 import { TableHeader } from './TableHeader';
 import { saveProduct } from '../service/productsService'

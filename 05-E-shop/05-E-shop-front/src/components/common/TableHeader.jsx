@@ -19,20 +19,22 @@ export class TableHeader extends Component {
     const { sortedColumn } = this.props;
     if (col?.path !== sortedColumn?.path) return null;
     return sortedColumn.order === "asc" ? (
-      <i className="fa fa-sort-asc"></i>
+      <i className="fa fa-caret-up"></i>
     ) : (
-      <i className="fa fa-sort-desc"></i>
+      <i className="fa fa-caret-down"></i>
     );
   };
 
   render() {
-    const {isLarge, isSimpleHeader,columns,ptableClass } = this.props;
+    const {isLarge, isSimpleHeader,columns} = this.props;
     
     if (isSimpleHeader) return (
       <thead>
         <tr >
        {columns.map((col) => (
-            <th key={col.label || col.key} className={col.path}>
+         <th
+           key={col.label || col.key}
+           className={col.path}>
               {col.label} 
             </th>
           ))}
@@ -50,7 +52,6 @@ export class TableHeader extends Component {
               key={col.label || col.key}
               className={col.path}
               onClick={() => this.raiseSort(col.path)}
-              // className="clickable"
             >
               {col.label} {this.renderIcon(col)}
             </th>

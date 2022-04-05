@@ -5,7 +5,6 @@ import CategoryBar from "./CategoryBar";
 import SearchBox from "./SearchBox";
 import _ from 'lodash'
 import Pagination from "./Pagination"; 
-import './ProductsTable.css'
 
 // step1:從func component改變成class component
 // step2:將Movie母元件的handleSort移至自己元件本身內，另設方法

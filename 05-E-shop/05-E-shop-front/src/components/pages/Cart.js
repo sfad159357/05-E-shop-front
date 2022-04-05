@@ -6,6 +6,7 @@ import Counter from '../common/Counter';
 import { useToasts } from 'react-toast-notifications';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import _ from 'lodash'
 
 function Cart({ user }) {
     
@@ -74,6 +75,11 @@ function Cart({ user }) {
     setSortedColumn(sortedColumn); // ascending升序
   };
 
+  const sortedCarts = _.orderBy(
+    cart,
+    [sortedColumn.path],
+    [sortedColumn.order]
+  )
 
     return (
     <div className='cart'>
@@ -83,7 +89,7 @@ function Cart({ user }) {
             <Table
               onSort={handleSort}
               sortedColumn={sortedColumn}
-            items={cart}
+            items={sortedCarts}
             columns={columns}
             />
             <hr className='cart-hr' />

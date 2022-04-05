@@ -28,7 +28,6 @@ function Checkout() {
             <div className='cart-table-container'>
 
             <Table
-                isSimpleHeader={true}
                 items={cart}
                 columns={columns}
             />
