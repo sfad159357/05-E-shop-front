@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react'
 import { CartContext } from '../../App'
-import { Link } from 'react-router-dom'
 import { useToasts } from 'react-toast-notifications';
 
 
@@ -69,11 +68,13 @@ function CardItems({ item }) {
                     <div className="cards__item__price" >${item.price}</div>
                     <div className="cards__item__sales" >銷售量:<span className="cards__item__sales_num">{item.sales}</span></div>
                    </div>
-                  <div className="cards__item__cart">
-                  <button className='cards__item__cart__minus' onClick={handleMinus}>-</button>
-                  <input className='cards__item__cart__number' type='number'  value={num} onChange={handleInput} />
-                  <button className='cards__item__cart__plus' onClick={handlePlus}>+</button>
-                    <button className='cards__item__cart__addCart' onClick={handleCart}>加入購物車</button>
+                <div className="cards__item__cart">
+                  <div className="cards__item__cart__counter">
+                    <button className='cards__item__cart__minus' onClick={handleMinus}>-</button>
+                    <input className='cards__item__cart__number' type='number'  value={num} onChange={handleInput} />
+                    <button className='cards__item__cart__plus' onClick={handlePlus}>+</button>
+                  </div>
+                  <button className='cards__item__cart__addCart' onClick={handleCart}>加入購物車</button>
                   </div>
                 </div>
         </li>

@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 
-// 從母元件MoviesTable之props取得
-// columns: array
-// sortColumn: object
-// onSort:function
 
 export class TableHeader extends Component {
   // 處理path和order的邏輯在TableHeader元件本身額外宣告的方法處理就好
   raiseSort = (path) => {
     const sortedColumn = { ...this.props.sortedColumn };
     if (sortedColumn.path === path)
-      // 如果連續點擊欄位主題，path沒變，sortColumn.path就不用另外給值，會跳到下一個判斷式
-      // 決定升序還降序，透過反向條件式，如果等於asc，就會跳到true,?決定desc；如果不等於asc，就會跳到false,:決定asc
       sortedColumn.order = sortedColumn.order === "asc" ? "desc" : "asc";
     else {
       // 如果沒有連續點
@@ -32,35 +26,41 @@ export class TableHeader extends Component {
   };
 
   render() {
-    const { isSimpleHeader,columns } = this.props;
-    if (isSimpleHeader)
-    return (
-    <thead>
-        <tr>
+    const {isLarge, isSimpleHeader,columns,ptableClass } = this.props;
+    
+    if (isSimpleHeader) return (
+      <thead>
+        <tr >
        {columns.map((col) => (
-            <th key={col.label || col.key}>
+            <th key={col.label || col.key} className={col.path}>
               {col.label} 
             </th>
           ))}
         </tr>
       </thead>
     )
+
+    if (!isLarge) return <></>
+    
     return (
       <thead>
-        <tr>
+        <tr >
           {columns.map((col) => (
             <th
               key={col.label || col.key}
+              className={col.path}
               onClick={() => this.raiseSort(col.path)}
-              className="clickable"
+              // className="clickable"
             >
               {col.label} {this.renderIcon(col)}
             </th>
           ))}
         </tr>
-      </thead>
+        </thead>
     );
   }
 }
+
+
 
 export default TableHeader;

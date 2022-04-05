@@ -5,6 +5,7 @@ import UpdateProducts from '../common/UpdateProducts'
 import { Link } from 'react-router-dom'
 import { getProducts, deleteProduct } from '../service/productsService'
 import { useToasts } from "react-toast-notifications";
+import './ProductsFrom.css'
 
 
 function ProductsForm({ user, categories }) {
@@ -73,9 +74,7 @@ function ProductsForm({ user, categories }) {
       )
     },
     { path: "src", label: "圖片", content: (product) => <img className='table-img' src={product.src} alt={product.title} /> },
-    {
-      path: "title", label: "商品名稱"
-    },
+    { path: "title", label: "商品名稱"},
     { path: "category.name", label: "種類" },
     { path: "price", label: "價格" },
     { path: "sales", label: "銷售量" },

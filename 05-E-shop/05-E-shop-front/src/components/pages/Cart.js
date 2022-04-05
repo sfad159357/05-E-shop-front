@@ -57,10 +57,10 @@ function Cart({ user }) {
     
 
      const columns = [
+       {
+         path: "title", label: "商品名稱"
+       },
     { path: "src", label: "圖片", content: (item) => <img className='table-img' src={item.src} alt={item.title} /> },
-    {
-      path: "title", label: "商品名稱"
-    },
     { path: "category.name", label: "種類" },
     { path: "price", label: "價格" },
     {path: "count", label: "數量", content:

@@ -1,6 +1,6 @@
 .footer-container {
     background-color: #242424;
-    padding: 2rem 0 1rem 0;
+    padding: 2rem 1rem;
     color:whitesmoke;
        display:flex;
      flex-direction:column;
@@ -32,9 +32,7 @@ section.footer-subscription{
     border: 1px solid white
 }
 
-Button{
-    /* margin:20px 0px */
-}
+
 
 .footer-links{
     display:flex;
@@ -48,8 +46,6 @@ Button{
     display:flex;
     align-items:center;
           width: 100%;
-
-
 }
 
 .footer-links-items{
@@ -127,21 +123,35 @@ Button{
 
 
 
-@media screen and (max-width: 768px) {
 
-    .footer-subscription{
-        padding: 10% 10%
+
+@media screen and (max-width: 568px) {
+    .footer-container{
+      padding: 0px 1rem;
+      margin: 0px;
     }
 
-    .footer-subscription-heading{
-        font-size: 1rem;
+     .footer-subscription {
+    padding: 0px;
+    margin: 0rem 0rem;
+  }
+
+    .footer-subscription.heading{
+      /* padding: 0px 1rem; */
+    }
+
+  .footer-subscription-text{
+    margin: 20px 0px;
+  }
+
+
+    .footer-subscription > p{
+        font-size: 1.5rem;
     }
     .input-area{
         margin: 1rem;
     }
-  .footer-links {
-    padding-top: 2rem;
-  }
+  
 
   .footer-input {
     width: 100%;
@@ -151,6 +161,7 @@ Button{
     width: 100%;
   }
 
+ 
   .footer-links-wrapper, .social-media-wrapper {
     flex-direction: column;
   }

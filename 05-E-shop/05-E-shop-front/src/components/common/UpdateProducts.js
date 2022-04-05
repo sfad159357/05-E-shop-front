@@ -111,16 +111,16 @@ function UpdateProducts({
 
 
   return (
-      <>
+      <div className='table-responsive-sm'>
       <form className='form' onSubmit={doSubmit}>
-        <table className="table table-striped mt-4 md-4"> 
+        <table className="simple"> 
           <TableHeader columns={columns} isSimpleHeader={isSimpleHeader} />
           <tbody >
             <tr>
-              <td><input  name='_id' className='table_input' type='text' value={inputValue._id }onChange={handleChange}  disabled /></td>
-              <td><input  name='src' className='table_input' type='text' value={inputValue.src }  onChange={handleChange}/></td>
-              <td><input  name='title' className='table_input' type='text' value={inputValue.title } onChange={handleChange}/></td>
-              <td><select name='categoryId' value={inputValue.categoryId} onChange={handleChange}>
+              <td className='_id'><input  name='_id'  type='text' value={inputValue._id }onChange={handleChange}  disabled /></td>
+              <td className='src' ><input  name='src' type='text' value={inputValue.src }  onChange={handleChange}/></td>
+              <td className='title'><input  name='title'  type='text' value={inputValue.title } onChange={handleChange}/></td>
+              <td className='categoryId'><select name='categoryId' value={inputValue.categoryId} onChange={handleChange}>
                   <option value='' />
                   {categoriesFiltered.map((option) => (
                     <option key={option._id} value={option._id}>
@@ -130,9 +130,9 @@ function UpdateProducts({
                 </select>
                 {/* {error && <div className="alert alert-danger">{error}</div>} */}
               </td>
-              <td><input name='price' className='table_input' type='text' value={inputValue.price } onChange={handleChange}/></td>
-              <td><input disabled name='sales' className='table_input' type='text' value={inputValue.sales } /></td>
-              <td><input  name='numberInStock'  className='table_input' type='text' value={inputValue.numberInStock } onChange={handleChange}/></td>
+              <td className='price'><input name='price'  type='number' value={inputValue.price } onChange={handleChange}/></td>
+              <td className='sales'><input disabled name='sales'  type='text' value={inputValue.sales } /></td>
+              <td className='numberInStock'><input  name='numberInStock'   type='number' value={inputValue.numberInStock } onChange={handleChange}/></td>
               <td>
                 <select  name='onSale' id='table-select' className='table_select' value={inputValue.onSale }  onChange={handleChange}>
                   <option value='' />
@@ -149,7 +149,7 @@ function UpdateProducts({
         </div>
            
           </form>
-      </>
+      </div>
   )
 }
 

@@ -110,6 +110,10 @@ h1 {
   font-size: 18px;
   line-height: 24px;
 }
+.cards__item__cart{
+  display: flex;
+  justify-content: space-between;
+}
 
 .cards__item__inline{
   display: flex;
@@ -124,10 +128,7 @@ h1 {
   color:#f33
 }
 
-.cards__item__cart{
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .cards__item__cart__addCart{
   justify-self: end;
@@ -177,20 +178,89 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-@media only screen and (max-width: 768px) {
-  .content__blog__container {
-    width: 84%;
+@media only screen and (max-width: 568px) {
+
+  h2{
+    padding: 20px 0px 0px;
+    text-align: center;
   }
+
+  .cards {
+    padding: 0rem 0.5rem 2rem 0rem;
+    background: #fff;
+  }
+
+  .cards__wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 20px 0 45px;
 }
 
-/* @media only screen and (min-width: 1024px) {
-  .cards__items {
-    display: flex;
+  .cards__items{
+  display: grid;
+  width: 100%;
+  grid-template-columns:  repeat(2, 1fr);
+  grid-auto-rows: 30%;
+  padding-left: 0px;
+  margin-bottom: 200px;
   }
-} */
 
-@media only screen and (max-width: 1024px) {
-  .cards__item {
-    margin-bottom: 2rem;
-  }
+  .cards__item__info{
+    padding: 0px 10px;
 }
+
+  .cards__item__price{
+  font-size: 15px;
+}
+
+ .cards__item__sales{
+  font-size: 10px;
+  align-self: center;
+}
+
+.cards__item__cart{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.cards__item__cart__minus,
+.cards__item__cart__number,
+.cards__item__cart__plus{
+  display: inline;
+  margin: 10px 0px;
+  padding: 0px 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+
+
+.cards__item__cart__addCart{
+  display: block;
+  font-size: 80%;
+  width: 80%;
+}
+
+.cards__item__pic-wrap::after {
+  content: attr(data-category);
+  position: absolute;
+  bottom: 0;
+  padding: 3px 4px;
+  margin-left: 0px;
+  max-width: 100%;
+  height: 22px;
+  font-size: 5px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1f98f4;
+  box-sizing: border-box;
+}
+ 
+}
+
+

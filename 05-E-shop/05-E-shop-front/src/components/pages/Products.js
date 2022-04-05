@@ -1,13 +1,11 @@
-import {useState, useEffect,useContext} from 'react'
-import '../../App.css'
+import {useState} from 'react'
 import Cards from '../common/Cards'
-import Footer from '../Footer'
-// import HeroSection from '../HeroSection'
 import paginate from '../../utils/paginate'
 import CategoryBar from '../common/CategoryBar'
 import _ from "lodash";
 import SortedBar from '../common/SortedBar'
 import SearchBox from '../common/SearchBox'
+import './Products.css'
 
 function Products({ onSaleProducts,categories}) {
   
@@ -63,12 +61,10 @@ function Products({ onSaleProducts,categories}) {
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
 
-
-
-
   return (
     <>
       <h1 className='products-title'>所有商品</h1>
+      <div className='products-operation'>
       <CategoryBar
         items={categories}
         onItemSelect={handleCategorySelect}
@@ -82,7 +78,7 @@ function Products({ onSaleProducts,categories}) {
         value={searchQuery}
         placeholder='搜尋想要的商品...'
         onChange={handleSearchQuery} />
-    
+      </div>
       {/* 如果沒有合乎篩選的data就叫出「抱歉...」 */}
       {paginatedData.length === 0
         ? <h3 className='not-searched'>抱歉，搜尋不到你想要的商品</h3>

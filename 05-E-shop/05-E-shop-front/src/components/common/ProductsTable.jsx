@@ -65,6 +65,8 @@ function ProductTable({ user, dbProducts, categories,columns  }) {
   
   const paginatedData = paginate(searchedData, currentPage, pageSize)
 
+  const ptableClass = 'ptable'
+
 
     return (
       <div className="table-container">
@@ -79,6 +81,7 @@ function ProductTable({ user, dbProducts, categories,columns  }) {
         onChange={handleSearchQuery} />
     
         <Table
+          ptableClass={ptableClass}
           items={paginatedData}
           columns={columns}
           sortedColumn={sortedColumn}

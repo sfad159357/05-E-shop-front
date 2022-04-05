@@ -13,17 +13,23 @@ export class TableBody extends Component {
   };
 
   render() {
-    const { items, columns } = this.props;
+    const { items, columns,isLarge } = this.props;
    
     return (
       <>
-        <tbody>
-          {items && items.map((item) => (
-            <tr key={item._id}>
+          <tbody>
+        {items && items.map((item) => (
+          
+          <tr key={item._id} >
               {columns.map((col) => (
-                <td key={this.createKey(item, col)} className={col.path}>
+              <>
+                {!isLarge && <th key={this.createKey(item, col) + 1} className={col.path || col.key}>
+                    {col.label}
+                  </th>}
+                <td key={this.createKey(item, col)} className={col.path || col.key}>
                   {this.renderCell(item, col)}
                 </td>
+              </>
               ))}
             </tr>
           ))}
