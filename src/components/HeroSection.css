@@ -1,0 +1,80 @@
+video{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1
+}
+
+.hero-container{
+    /* background:url('/images/img-home.jpg') center center/cover no-repeat; */
+    height:100%;
+    width: 100%;
+    padding: 1rem 0 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
+    object-fit: contain;
+}
+
+.hero-container > h1 {
+    color: #fff;
+    font-size:100px;
+    margin-top: 10px;
+}
+
+.hero-container > p{
+    margin: 2rem;
+    color: #fff;
+    font-size:32px;
+
+}
+
+.bttn{
+    margin-top: 10px;
+}
+
+.hero-btns .bttn{
+    margin: 6px;
+}
+
+@media screen and (max-width:960px) {
+    .hero-container > h1 {
+        font-size: 70px;
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width:568px) {
+    .hero-container{
+        height: 100%;
+        padding: 2rem 0px
+    }
+    .hero-container > h1 {
+        font-size: 2rem;
+        margin-top: 20px;
+    }
+
+    .hero-container > p {
+        font-size: 1.5rem;
+        margin-top: 20px;
+    
+    }
+
+    .btn-mobile{
+        display:block;
+        text-decoration: none;
+    }
+    .hero-btns{
+        margin-bottom: 1.5rem;
+    }
+    .bttn{
+        font-size: 0.5rem;
+        width: 100%;
+        
+    }
+
+
+}

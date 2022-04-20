@@ -1,0 +1,275 @@
+.cards {
+  padding: 2rem 1rem;
+  background: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin: 1rem 0
+}
+
+.cards__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cards__wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 50px 0 45px;
+}
+
+.cards__items {
+  display: grid;
+  width: 100%;
+  grid-template-columns:  repeat(4, 1fr);
+  grid-auto-rows: 400px;
+
+  margin-bottom: 24px;
+}
+
+.cards__item {
+  list-style: none;
+    /* flex: 1，讓圖片平均分佈在空間當中 */
+  flex: 1; 
+  margin: 0 1rem;
+  border-radius: 10px;
+    width: 80%;
+    height: 90%;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  overflow: hidden;
+}
+
+.cards__item__link {
+  display: flex;
+  flex-flow: column;
+
+  text-decoration: none;
+}
+
+.cards__item__pic-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
+
+.fade-img {
+  animation-name: fade-img;
+  animation-duration: 2s;
+}
+
+.cards__item__pic-wrap::after {
+  content: attr(data-category);
+  position: absolute;
+  bottom: 0;
+  margin-left: 10px;
+  padding: 6px 8px;
+  max-width: calc((100%) - 60px);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1f98f4;
+  box-sizing: border-box;
+}
+
+.cards__item__img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  transition: all 0.2s linear;
+}
+
+.cards__item__img:hover {
+  transform: scale(1.1);
+}
+
+.cards__item__info {
+  padding: 10px 20px ;
+}
+
+.cards__item__text {
+  color: #252e48;
+  font-size: 18px;
+  line-height: 24px;
+}
+.cards__item__cart{
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards__item__inline{
+  display: flex;
+  justify-content: space-between; 
+}
+
+.cards__item__price{
+  font-size: 20px;
+}
+
+.cards__item__sales_num{
+  color:#f33
+}
+
+
+
+.cards__item__cart__addCart{
+  justify-self: end;
+}
+
+.cards__item__cart__number{
+  width: 50px;
+}
+
+.cards__item__cart__minus,
+.cards__item__cart__number,
+.cards__item__cart__plus,
+.cards__item__cart__addCart{
+  display: inline;
+  margin: 0px;
+  padding: 0px 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.cards__item__cart__minus{
+  background-color: #fdd;
+}
+
+.cards__item__cart__plus{
+  background-color: #cff;
+}
+
+.cards__item__cart__addCart{
+  background-color: #efe;
+}
+
+
+
+/* 取消掉input的預設的上下箭頭 */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.count button:hover{
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 1px 1px  #666;
+}
+
+
+@media only screen and (max-width: 568px) {
+
+  h2{
+    padding: 20px 0px 0px;
+    text-align: center;
+  }
+
+  .cards {
+    padding: 0rem 0.5rem 2rem 0rem;
+    background: #fff;
+  }
+
+  .cards__container{
+        height: 100%;
+
+  }
+
+  .cards__wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+    height: 100%;
+  width: 100%;
+  margin: 20px 0 0px;
+}
+
+  .cards__items{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  flex: auto;
+  grid-template-columns:  repeat(2, 1fr);
+  padding-left: 0px;
+  }
+
+  .cards__item{
+    height: 350px;
+}
+
+  .cards__item__info{
+    padding: 0px 10px;
+}
+
+  .cards__item__price{
+  font-size: 15px;
+}
+
+ .cards__item__sales{
+  font-size: 10px;
+  align-self: center;
+}
+
+
+
+.cards__item__cart{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.cards__item__cart__minus,
+.cards__item__cart__number,
+.cards__item__cart__plus{
+  display: inline;
+  margin: 10px 0px;
+  padding: 0px 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+
+
+.cards__item__cart__addCart{
+  display: block;
+  font-size: 80%;
+  width: 80%;
+}
+
+.cards__item__pic-wrap::after {
+  content: attr(data-category);
+  position: absolute;
+  bottom: 0;
+  padding: 3px 4px;
+  margin-left: 0px;
+  max-width: 100%;
+  height: 22px;
+  font-size: 5px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1f98f4;
+  box-sizing: border-box;
+}
+ 
+}
+
+

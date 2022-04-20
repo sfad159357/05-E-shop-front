@@ -1,0 +1,255 @@
+.form {
+ margin: 1rem 3rem;
+  padding: 1rem 2rem;
+  border: #333 1px solid;
+}
+
+.table-img  {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+ .form_btn{
+      margin: 20px 0px 0px 0px;
+  }
+
+@media screen and (min-width:569px){
+
+.table-responsive-sm{
+    margin-bottom: 50px;
+}
+
+table.simple{
+
+    border-collapse:separate; 
+    border-spacing:10px 10px ;
+}
+
+thead{
+    margin-bottom: 20px;
+}
+
+tbody{
+    margin: 0px 0px 20px 0px;
+}
+
+.ptable  tr{
+   height: 100px;;
+}
+
+.simple thead tr{
+    /* width: 100%; */
+    margin-bottom: 30px;
+    padding: 20px 0px;
+}
+
+.simple tbody{
+    margin-top: 10px;
+}
+
+.simple tbody input{
+    /* margin: 10px 20px; */
+    /* width: 0%; */
+}
+
+.simple th{
+    text-align: left;
+    /* width: 80%; */
+}
+
+
+select{
+ height: 28px;
+}
+
+
+.simple input
+{
+    width: 100%;
+}
+
+.simple th.price,
+.simple td.price
+{
+    margin-left: 50px;
+}
+
+.form_btn{
+  display: flex;
+  justify-content: end;
+}
+
+
+
+.ptable td._id{
+  width: 22%;
+}
+
+.ptable td.src{
+   width: 13%; 
+  /* margin: 0px;  */
+}
+
+td.numberInStock{
+   width: 10%; 
+  /* margin: 0px;  */
+}
+
+th.sales, th.price, th.numberInStock{
+    /* text-align: center; */
+}
+
+td.sales, td.price, td.numberInStock{
+       /* width: 10%;  */
+    /* text-align: center; */
+}
+
+
+
+
+.form_btn button{
+  margin-left: 10px;
+}
+
+.form_btn{
+  display: flex;
+  justify-content: end;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+
+.not-on-sale, .no-stock{
+    color: #f55
+}
+.ptable{
+    width: 100%;
+}
+
+
+
+.table-container{
+    margin: 1rem 3rem;
+    border: 1px solid #333;
+    padding: 30px;
+}
+
+.table-container .nav-item{
+    display: flex;
+    align-items: center;
+}
+
+.table-container button{
+    margin-top: 0;
+}
+
+
+.table-container td{
+    vertical-align: middle
+}
+
+.table-container td.title{
+    /* font-size: 20px; */
+}
+
+
+}
+
+@media screen and (max-width:568px){
+
+    .simple thead{
+    display: inline-block;
+    }
+
+    .simple tbody{
+        display: inline-block;
+
+    }
+
+    tr 
+    { display: block; 
+        float: left;
+    }
+   
+  th{
+      display: block;
+    margin: 10px 0px 10px 0px;
+  }
+
+
+  td 
+    { display: block}
+
+    .form{
+        margin: 0px;
+        padding: 10px 20px;
+    }
+
+  .form_btn{
+  display: flex;
+  justify-content: center;
+}
+
+  .form_btn button{
+      margin: 10px 5%;
+  }
+
+
+    .simple th{
+        margin: 14px 20px 14px 0px;
+    }
+    .simple td{
+        margin: 10px 0px 10px 0px;
+    }
+    
+  .table-container{
+      padding: 10px 0px;
+        margin: 10px 10px;
+    }
+    
+    .ptable tr{
+        padding: 0px 3% 30px 3%;
+        border-bottom: 1px solid #333;
+    }
+
+    .ptable th{
+        margin: 10px 50px 0px 10px ;        
+    }
+
+     .ptable td{
+        width: 100%;
+        margin: 10px 10px 10px 0px;
+         vertical-align: middle;
+        text-align: center;
+    }
+
+     .ptable td._id{
+         word-break:break-all;
+         margin: 10px 0px 10px 0px;
+        width: 110px;
+    }
+
+
+
+     .ptable td.delete{
+         margin-top:30px;
+     }
+
+    img.table-img{
+     text-align: center;
+
+    }
+
+ 
+}
