@@ -11,7 +11,6 @@ import Checkout from './components/pages/Checkout';
 import Cart from './components/pages/Cart'
 import Success from './components/pages/Success'
 import Cancel from './components/pages/Cancel'
-
 import auth from './components/service/authService'
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
 import { getProducts } from './components/service/productsService'
