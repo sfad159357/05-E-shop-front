@@ -10,14 +10,13 @@ import _ from 'lodash'
 
 function Cart({ user }) {
     
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-        useEffect(() => {
-            if (!user) {
-                navigate('/login', {state:'cart'})
-            }
-            console.log('useEffect navigate')
-        },[user])
+    //     useEffect(() => {
+    //         if (!user) {
+    //             navigate('/login', {state:'cart'})
+    //         }
+    //     },[user])
 
   const [sortedColumn, setSortedColumn] = useState( {path: "title", order: "asc" })
 

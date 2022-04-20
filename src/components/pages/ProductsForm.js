@@ -86,7 +86,7 @@ function ProductsForm({ user, categories }) {
     <>
       <h1 id='update-div' className="ProductsForm">產品資訊一覽表</h1>
       <UpdateProducts
-        user={user}
+        // user={user}
         columns={columns}
         categories={categories}
         update={update}
@@ -96,7 +96,7 @@ function ProductsForm({ user, categories }) {
         dbProducts={dbProducts}
       />
       <ProductTable
-        user={user}
+        // user={user}
         columns={columns}
         dbProducts={dbProducts}
         categories={categories} />

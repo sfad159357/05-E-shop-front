@@ -32,12 +32,12 @@ function Navbar({ user }) {
                   <li className="nav-item">
                       <Link to='/products' className='nav-links' onClick={closeMobileMenu}>產品內容</Link>
                   </li>
+                  <li className="nav-item">
+                      <Link to='/update-products' className='nav-links' onClick={closeMobileMenu}>更新產品</Link>
+                  </li>
                 <li className="nav-item">
                       <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>購物車</Link>
                       <span className="position-relative translate-middle badge rounded-pill bg-danger">{cart.length  }</span>
-                  </li>
-                  <li className="nav-item">
-                      <Link to='/update-products' className='nav-links' onClick={closeMobileMenu}>更新產品</Link>
                   </li>
                   {user && (
                       <>
