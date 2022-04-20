@@ -51,7 +51,7 @@ function Checkout() {
     return (
       <div className='checkout'>
         <h1>結帳</h1>
-        <div className='table-container'>
+        <div className='cart-table-container'>
             <Table
                 items={cart}
                 columns={columns}
@@ -61,8 +61,10 @@ function Checkout() {
                 <span className='cart-sum-title'>合計：</span>
                 <span className='cart-sum-number'>{cart?.reduce(sumUp, 0)} </span>
                 <span>元</span>
-            </div>
-            <button className='btn btn-primary pay btn-next' onClick={pay}>付款</button>
+                </div>
+                <div className='link-checkout'>
+                    <button className='btn btn-primary pay' onClick={pay}>付款</button>
+                </div>
         </div>
       </div>
   )
