@@ -9,12 +9,16 @@ import Logout from './components/pages/Logout';
 import ProductsForm from './components/pages/ProductsForm';
 import Checkout from './components/pages/Checkout';
 import Cart from './components/pages/Cart'
+import Success from './components/pages/Success'
+import Cancel from './components/pages/Cancel'
+
 import auth from './components/service/authService'
 import {BrowserRouter , Routes,  Route} from "react-router-dom"
 import { getProducts } from './components/service/productsService'
 import { getCategories } from './components/service/categoryService'
 import { ToastProvider } from 'react-toast-notifications';
 import './App.css';
+import Cancel from '../../../eshopf/src/components/pages/Cancel';
 
 
 export const CartContext = createContext()
@@ -61,7 +65,9 @@ function App() {
         <Route path="/products" element={<Products onSaleProducts={onSaleProducts} categories={ categories}/>} />
         <Route path="/update-products" element={<ProductsForm user={user} categories={ categories}/>} />
         <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
         <Route path="/logout" element={<Logout user={user} setUser={setUser} />} />
         <Route path="/cart" element={<Cart user={user} />} />
         <Route path="/checkout" element={<Checkout user={user}/>} />
