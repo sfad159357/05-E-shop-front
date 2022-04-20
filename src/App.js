@@ -18,7 +18,6 @@ import { getProducts } from './components/service/productsService'
 import { getCategories } from './components/service/categoryService'
 import { ToastProvider } from 'react-toast-notifications';
 import './App.css';
-import Cancel from '../../../eshopf/src/components/pages/Cancel';
 
 
 export const CartContext = createContext()
